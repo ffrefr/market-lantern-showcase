@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Showcase of Market Lantern, an AI-powered equity research app and tool-using financial assistant by Enis Bozkurt." />
+  <title>Market Lantern — AI Work Sample · Enis Bozkurt</title>
+  <style>
+    :root {
+      --primary: #7C3AED;
+      --primary-light: #A78BFA;
+      --primary-bg: rgba(124, 58, 237, 0.18);
+      --success: #10B981;
+      --info: #3B82F6;
+      --text: #E5E7EB;
+      --text-2: #CBD5E1;
+      --muted: #94A3B8;
+      --surface: #1B2434;
+      --surface-alt: #222E43;
+      --border: #2E3A52;
+      --bg: #0F1624;
+      --bg-alt: #141C2E;
+      --white: #FFFFFF;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: var(--primary-light); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wrap {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 28px 22px 80px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .brand:hover { text-decoration: none; }
+
+    .mark {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+    }
+
+    .brand-name {
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      font-size: 15px;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    nav { display: flex; gap: 18px; flex-wrap: wrap; }
+    nav a { color: var(--muted); font-size: 13px; }
+    nav a:hover { color: var(--text); text-decoration: none; }
+
+    .hero {
+      padding: 56px 0 40px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--primary-light);
+      background: var(--primary-bg);
+      border: 1px solid rgba(167, 139, 250, 0.25);
+      border-radius: 999px;
+      padding: 5px 12px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(36px, 6vw, 56px);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .pitch {
+      font-size: 20px;
+      color: var(--text-2);
+      max-width: 38rem;
+      line-height: 1.45;
+    }
+
+    section {
+      padding: 36px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    h2 {
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--primary-light);
+      margin-bottom: 14px;
+      font-weight: 600;
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 20px 0 10px;
+    }
+
+    p, li { color: var(--text-2); font-size: 16px; }
+    p + p { margin-top: 12px; }
+
+    ul.plain {
+      padding-left: 1.15rem;
+      display: grid;
+      gap: 8px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 16px 14px;
+    }
+
+    .card strong {
+      display: block;
+      color: var(--white);
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .card span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    /* Pipeline */
+    .pipeline {
+      display: grid;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 14px;
+      align-items: start;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      position: relative;
+    }
+
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--primary-bg);
+      color: var(--primary-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .step h3 { margin: 2px 0 4px; font-size: 15px; color: var(--white); }
+    .step p { font-size: 14px; }
+
+    .flow {
+      margin: 22px 0 8px;
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .flow svg { width: 100%; height: auto; min-width: 640px; display: block; }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .chip {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 13px;
+      padding: 6px 11px;
+      border-radius: 999px;
+    }
+
+    .note {
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--muted);
+      background: var(--bg-alt);
+      border-left: 3px solid var(--primary);
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* Chat mock */
+    .phone {
+      max-width: 440px;
+      margin: 16px 0 0;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .phone-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .phone-bar .dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--primary-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .phone-bar strong { font-size: 14px; color: var(--white); display: block; }
+    .phone-bar small { font-size: 11px; color: var(--muted); }
+
+    .thread { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+
+    .bubble {
+      max-width: 86%;
+      padding: 12px 14px;
+      border-radius: 16px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .bubble.agent {
+      align-self: flex-start;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-bottom-left-radius: 4px;
+      color: var(--text);
+    }
+
+    .bubble.user {
+      align-self: flex-end;
+      background: var(--primary);
+      color: var(--white);
+      border-bottom-right-radius: 4px;
+    }
+
+    .bubble.tool {
+      align-self: flex-start;
+      background: transparent;
+      border: 1px dashed var(--border);
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      border-radius: 8px;
+    }
+
+    .meta {
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    footer {
+      margin-top: 12px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    footer strong { color: var(--text); font-weight: 600; }
+
+    @media (max-width: 600px) {
+      .hero { padding: 36px 0 28px; }
+      header { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <svg class="mark" viewBox="0 0 40 40" aria-hidden="true">
+          <rect width="40" height="40" rx="10" fill="#7C3AED"/>
+          <path d="M20 8c-5.5 6.2-8 11-8 15.2C12 28.4 15.6 32 20 32s8-3.6 8-8.8C28 19 25.5 14.2 20 8z" fill="#F5F3FF"/>
+          <path d="M20 18.5c-1.7 2-2.4 3.5-2.4 4.8A2.4 2.4 0 0 0 20 25.7a2.4 2.4 0 0 0 2.4-2.4c0-1.3-.7-2.8-2.4-4.8z" fill="#7C3AED"/>
+        </svg>
+        <div>
+          <div class="brand-name">Market Lantern</div>
+          <div class="brand-sub">AI work sample</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#problem">Problem</a>
+        <a href="#what">What it does</a>
+        <a href="#ai">How the AI works</a>
+        <a href="#stack">Stack</a>
+        <a href="#sample">Sample</a>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <div class="eyebrow">Personal project · Equity research + AI assistant</div>
+      <h1>Market Lantern</h1>
+      <p class="pitch">An AI-powered equity research mobile app with an in-app assistant that answers market questions by calling tools against live research data.</p>
+    </div>
+
+    <section id="problem">
+      <h2>The problem</h2>
+      <p>Equity research is spread across quotes, earnings calendars, news, filings, and trade disclosures. Looking that up usually means leaving a research view and searching in several places.</p>
+      <p>Market Lantern brings those sources into one mobile app. The AI assistant is there so a user can ask a question in plain language and get an answer grounded in the app’s own market data, or in a web search when the database does not have it.</p>
+    </section>
+
+    <section id="what">
+      <h2>What it does</h2>
+      <p>The mobile app is a professional equity research client. Alongside the assistant, it includes:</p>
+      <div class="grid">
+        <div class="card"><strong>Quotes and charts</strong><span>Live quotes, historical bars, company profiles, and custom interactive charts.</span></div>
+        <div class="card"><strong>Fundamentals</strong><span>Financials, ratios, analyst estimates, and related analysis views.</span></div>
+        <div class="card"><strong>News and filings</strong><span>News feeds, SEC filings, insider Form 4 activity, and congressional trade disclosures.</span></div>
+        <div class="card"><strong>Market context</strong><span>Market status, movers, sector performance, a Fear and Greed index, earnings and economic calendars, and options data.</span></div>
+        <div class="card"><strong>Portfolios and watchlists</strong><span>Saved lists and portfolio views, with market-aware background sync while markets are open.</span></div>
+        <div class="card"><strong>Community</strong><span>Profiles, friends, messaging, posts, and courses.</span></div>
+      </div>
+      <p class="note">This page describes the product and the AI assistant at a high level. It does not include source code, environment files, API keys, or internal service URLs.</p>
+    </section>
+
+    <section id="ai">
+      <h2>How the AI works</h2>
+      <p>The in-app chat, labeled Market Lantern AI, talks to a Python FastAPI agent. The model can answer directly, or it can call tools when the question is about market data.</p>
+
+      <div class="flow" aria-label="Architecture diagram of the Market Lantern AI pipeline">
+        <svg viewBox="0 0 900 220" role="img" xmlns="http://www.w3.org/2000/svg">
+          <title>Market Lantern AI pipeline: chat UI to FastAPI agent to language model and tools, then back to the user</title>
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#A78BFA"/>
+            </marker>
+          </defs>
+          <rect x="10" y="70" width="150" height="70" rx="12" fill="#1B2434" stroke="#2E3A52"/>
+          <text x="85" y="100" text-anchor="middle" fill="#E5E7EB" font-size="13" font-family="system-ui, sans-serif" font-weight="600">Chat UI</text>
+          <text x="85" y="118" text-anchor="middle" fill="#94A3B8" font-size="11" font-family="system-ui, sans-serif">React Native</text>
+
+          <line x1="160" y1="105" x2="214" y2="105" stroke="#A78BFA" stroke-width="2" marker-end="url(#arrow)"/>
+
+          <rect x="216" y="70" width="170" height="70" rx="12" fill="#1B2434" stroke="#7C3AED"/>
+          <text x="301" y="100" text-anchor="middle" fill="#E5E7EB" font-size="13" font-family="system-ui, sans-serif" font-weight="600">FastAPI agent</text>
+          <text x="301" y="118" text-anchor="middle" fill="#94A3B8" font-size="11" font-family="system-ui, sans-serif">/agent/chat</text>
+
+          <line x1="386" y1="105" x2="440" y2="105" stroke="#A78BFA" stroke-width="2" marker-end="url(#arrow)"/>
+
+          <rect x="442" y="70" width="170" height="70" rx="12" fill="#1B2434" stroke="#2E3A52"/>
+          <text x="527" y="100" text-anchor="middle" fill="#E5E7EB" font-size="13" font-family="system-ui, sans-serif" font-weight="600">Language model</text>
+          <text x="527" y="118" text-anchor="middle" fill="#94A3B8" font-size="11" font-family="system-ui, sans-serif">OpenRouter or Groq</text>
+
+          <line x1="527" y1="140" x2="527" y2="162" stroke="#A78BFA" stroke-width="2" marker-end="url(#arrow)"/>
+
+          <rect x="390" y="166" width="274" height="44" rx="12" fill="#141C2E" stroke="#2E3A52"/>
+          <text x="527" y="193" text-anchor="middle" fill="#CBD5E1" font-size="12" font-family="system-ui, sans-serif">Tool loop, if needed</text>
+
+          <line x1="390" y1="188" x2="300" y2="188" stroke="#A78BFA" stroke-width="2"/>
+          <line x1="300" y1="188" x2="300" y2="140" stroke="#A78BFA" stroke-width="2" marker-end="url(#arrow)"/>
+
+          <rect x="680" y="28" width="210" height="70" rx="12" fill="#1B2434" stroke="#2E3A52"/>
+          <text x="785" y="58" text-anchor="middle" fill="#E5E7EB" font-size="13" font-family="system-ui, sans-serif" font-weight="600">Convex database</text>
+          <text x="785" y="76" text-anchor="middle" fill="#94A3B8" font-size="11" font-family="system-ui, sans-serif">Status, stocks, earnings, news</text>
+
+          <rect x="680" y="122" width="210" height="70" rx="12" fill="#1B2434" stroke="#2E3A52"/>
+          <text x="785" y="152" text-anchor="middle" fill="#E5E7EB" font-size="13" font-family="system-ui, sans-serif" font-weight="600">Web search tool</text>
+          <text x="785" y="170" text-anchor="middle" fill="#94A3B8" font-size="11" font-family="system-ui, sans-serif">Used when data is not in-app</text>
+
+          <line x1="664" y1="188" x2="680" y2="157" stroke="#A78BFA" stroke-width="2" marker-end="url(#arrow)"/>
+          <line x1="664" y1="188" x2="680" y2="63" stroke="#A78BFA" stroke-width="2" marker-end="url(#arrow)"/>
+        </svg>
+      </div>
+
+      <div class="pipeline">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div>
+            <h3>The user asks a question in the app</h3>
+            <p>The chat screen sends the message to the agent’s chat endpoint. Replies come back as text and are rendered as Markdown.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div>
+            <h3>The agent decides whether tools are needed</h3>
+            <p>Short greetings are answered directly. If the message looks like a data request (price, earnings, news, market status, fundamentals, and similar terms), the model is allowed to call tools. Otherwise it answers without them.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div>
+            <h3>Tools fetch facts, then the model writes the reply</h3>
+            <p>Supported tools look up market status, search stocks, get earnings for a symbol or for today, and fetch stored market news. A web search tool is used when the answer is not in the database. Tool results are truncated before they go back to the model, and a second pass turns them into a customer-facing answer. The assistant is instructed to speak directly to the user and not to show internal reasoning.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>System prompt (from the project)</h3>
+      <div class="card">
+        <span style="color:#CBD5E1; font-size:14px; display:block;">
+          You are “Market Lantern AI”, a professional financial assistant for Market Lantern customers.
+          Speak directly to the user. Be helpful, polite, and professional.
+          Do not output internal monologue or thoughts. Just output the response.
+          Use tools only when needed for data (price, news, earnings). If no tool is needed, respond normally.
+        </span>
+      </div>
+    </section>
+
+    <section id="stack">
+      <h2>Tech stack</h2>
+      <div class="chips">
+        <span class="chip">Expo SDK 54</span>
+        <span class="chip">React Native</span>
+        <span class="chip">TypeScript</span>
+        <span class="chip">Python</span>
+        <span class="chip">FastAPI</span>
+        <span class="chip">OpenRouter</span>
+        <span class="chip">Function calling / tools</span>
+        <span class="chip">Convex</span>
+        <span class="chip">Clerk</span>
+        <span class="chip">Financial Modeling Prep</span>
+        <span class="chip">Alpaca Markets</span>
+        <span class="chip">SVG charts</span>
+      </div>
+      <p class="note">The default hosted model in the agent is configurable in code. The project’s current default is Xiaomi Mimo V2 Flash via OpenRouter, with optional Groq or local Ollama paths.</p>
+    </section>
+
+    <section id="sample">
+      <h2>Sample output</h2>
+      <p>The first message below is the real default greeting from the chat screen in the project. The rest of the thread is an illustrative example of the tool-use path. It is not a live model transcript, and it does not use real prices or earnings figures.</p>
+
+      <div class="phone" aria-label="Chat example">
+        <div class="phone-bar">
+          <div class="dot">
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M8 2c-2.6 3-3.8 5.2-3.8 7.1C4.2 11.7 5.9 13.4 8 13.4s3.8-1.7 3.8-4.3C11.8 7.2 10.6 5 8 2z" fill="#A78BFA"/>
+            </svg>
+          </div>
+          <div>
+            <strong>Market Lantern AI</strong>
+            <small>In-app assistant</small>
+          </div>
+        </div>
+        <div class="thread">
+          <div class="bubble agent">
+            <div class="meta">Default greeting (from the app)</div>
+            Hello! I am your AI assistant. How can I help you with your portfolio or market data today?
+          </div>
+          <div class="bubble user">Are there earnings today, and is the market open?</div>
+          <div class="bubble tool">
+            example tool calls<br />
+            get_market_status()<br />
+            get_todays_earnings()
+          </div>
+          <div class="bubble agent">
+            <div class="meta">Example output (illustrative)</div>
+            I checked Market Lantern’s market status and today’s earnings calendar. I can tell you whether the U.S. market is open or closed right now, and list the companies on today’s earnings calendar from the app’s database. If you have a symbol in mind, I can also pull that company’s earnings history.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>
+        <strong>Enis Bozkurt</strong><br />
+        <a href="https://www.linkedin.com/in/enis-bozkurt" rel="noopener noreferrer">linkedin.com/in/enis-bozkurt</a>
+      </div>
+      <div>AI work sample · Market Lantern<br />No source code, keys, or private data on this page.</div>
+    </footer>
+  </div>
+</body>
+</html>
