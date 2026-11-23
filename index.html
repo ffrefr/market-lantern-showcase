@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Market Lantern, a mobile equity research app with a data pipeline, a Convex backend, and an in-app AI assistant, built by Enis Bozkurt." />
+  <meta name="description" content="Market Lantern, a mobile equity research app with a Convex backend and an in-app AI assistant, built by Enis Bozkurt." />
   <title>Market Lantern, a project by Enis Bozkurt</title>
   <link rel="icon" href="assets/favicon.png" type="image/png" />
   <style>
@@ -317,7 +317,7 @@
     .topnav a:hover { color: var(--primary); text-decoration: none; }
 
     .glance {
-      display: grid; grid-template-columns: repeat(5, 1fr);
+      display: grid; grid-template-columns: repeat(4, 1fr);
       margin-top: 56px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
     }
     .glance div { padding: 18px 16px 18px 0; }
@@ -441,7 +441,7 @@
     .imp i { width: 5px; height: 10px; border-radius: 2px; background: #E5E7EB; display: inline-block; }
     .imp i.f { background: var(--amber); }
 
-    /* pipeline + backend */
+    /* backend */
     .lanes { margin-top: 22px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
     .lane { display: grid; grid-template-columns: 150px 1fr; border-top: 1px solid var(--border); }
     .lane:first-child { border-top: 0; }
@@ -529,6 +529,24 @@
       .tools-wrap td { border: 0; padding: 2px 0; }
       .tools-wrap td:nth-child(2)::before { content: "Input: "; color: var(--muted); }
     }
+
+    /* richer chat mockup */
+    .toolrow { display: flex; flex-wrap: wrap; gap: 5px; }
+    .toolchip { display: inline-flex; align-items: center; gap: 5px; font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 9.5px; color: var(--primary); background: var(--primary-bg); border: 1px solid #E4DAFB; border-radius: 6px; padding: 3px 7px; }
+    .toolchip i { width: 6px; height: 6px; border-radius: 3px; background: var(--success); display: inline-block; }
+    .bubble.rich { max-width: 96%; padding: 9px 10px; }
+    .bubble.rich p { margin: 6px 0; }
+    .mkt { display: inline-flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 600; background: var(--surface-alt); border-radius: 20px; padding: 3px 8px; }
+    .ecard { border: 1px solid var(--border); border-radius: 10px; padding: 7px 8px; margin-top: 6px; background: #FCFCFD; }
+    .eh { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+    .eh b { font-size: 11.5px; font-weight: 800; }
+    .eh span:not(.badge) { font-size: 9px; color: var(--muted); flex: 1; }
+    .eg { display: grid; grid-template-columns: auto auto 1fr; gap: 2px 8px; align-items: baseline; font-size: 10px; }
+    .eg span { color: var(--text-2); font-size: 9.5px; }
+    .eg b { font-weight: 700; font-variant-numeric: tabular-nums; }
+    .eg em { font-style: normal; color: var(--muted); font-size: 9.5px; text-align: right; font-variant-numeric: tabular-nums; }
+    .fine-note { font-size: 10px; color: var(--text-2); margin-bottom: 0 !important; }
+    .convo-cap { text-align: center; font-size: 8.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
   </style>
 </head>
 <body>
@@ -540,7 +558,6 @@
       </a>
       <nav class="topnav" aria-label="Sections">
         <a href="#capabilities">Features</a>
-        <a href="#pipeline">Data pipeline</a>
         <a href="#backend">Backend</a>
         <a href="#assistant">AI assistant</a>
         <a href="#stack">Stack</a>
@@ -558,8 +575,8 @@
         <div class="kicker">Student project</div>
         <h1>I built an equity research app, then gave it a way to answer questions.</h1>
         <p class="lede">Market Lantern is a React Native app I have been building for quotes, charts, full financial statements, earnings, options, news, filings, trade disclosures, and macro calendars.</p>
-        <p class="lede">Behind it is a Convex backend that pulls from Financial Modeling Prep, Alpaca, and CNN on a schedule, and a small Python agent that answers questions using the same data. This page walks through all of it.</p>
-        <p class="fine">Figures in the mockups on this page are illustrative sample data, not live prices or results.</p>
+        <p class="lede">Behind it is a Convex backend that pulls from partnered data vendors on a schedule, and a small Python agent that answers questions using the same data. This page walks through all of it.</p>
+        <p class="fine">The chat shows real reported results from Nov 17, 2026. Every other mockup on this page uses illustrative sample data.</p>
       </div>
       <div class="stage">
         <div class="device device-chat" aria-label="Market Lantern AI chat mockup">
@@ -582,18 +599,22 @@
               <span style="width:28px"></span>
             </div>
             <div class="thread">
-              <div class="bubble agent">
-                <div class="tag">Default greeting, from the app</div>
-                Hello! I am your AI assistant. How can I help you with your portfolio or market data today?
+              <div class="bubble user">Is the market still open, and how did today's earnings come in?</div>
+              <div class="toolrow"><span class="toolchip"><i></i>get_market_status()</span><span class="toolchip"><i></i>get_todays_earnings()</span></div>
+              <div class="bubble agent rich">
+                <div class="mkt"><span class="dot red"></span>U.S. market closed at 4:00 PM ET</div>
+                <p>Two big reports today, and both beat on EPS and revenue:</p>
+                <div class="ecard">
+                  <div class="eh"><b>NVDA</b><span>after the close</span><span class="badge buy">BEAT</span></div>
+                  <div class="eg"><span>EPS</span><b>$2.68</b><em>est. $2.48</em><span>Revenue</span><b>$115.84B</b><em>est. $109.10B</em></div>
+                </div>
+                <div class="ecard">
+                  <div class="eh"><b>DIS</b><span>before the open</span><span class="badge buy">BEAT</span></div>
+                  <div class="eg"><span>EPS</span><b>$1.77</b><em>est. $1.67</em><span>Revenue</span><b>$25.95B</b><em>est. $25.18B</em></div>
+                </div>
+                <p class="fine-note">Adjusted EPS against analyst consensus. Want the full earnings history for either one?</p>
               </div>
-              <div class="bubble user">Are there earnings today, and is the market open?</div>
-              <div class="bubble tool">example tool calls
-get_market_status()
-get_todays_earnings()</div>
-              <div class="bubble agent">
-                <div class="tag">Example output, illustrative</div>
-                I checked the app’s market status and today’s earnings calendar. I can tell you whether the U.S. market is open, and list the companies on the calendar from the database. If you have a symbol in mind, I can pull that company’s earnings history too.
-              </div>
+              <div class="convo-cap">Example conversation, real reported figures from Nov 17, 2026</div>
             </div>
             <div class="composer">
               <div class="field">Ask about stocks, market status...</div>
@@ -673,17 +694,16 @@ get_todays_earnings()</div>
 
     <div class="glance" aria-label="Project at a glance">
       <div><b>9</b><span>research tabs on every stock page</span></div>
-      <div><b>28</b><span>scheduled jobs keeping data fresh</span></div>
       <div><b>44</b><span>tables in the Convex schema</span></div>
       <div><b>6</b><span>tools the AI assistant can call</span></div>
-      <div><b>3</b><span>outside data sources: FMP, Alpaca, CNN</span></div>
+      <div><b>18</b><span>features covered on this page</span></div>
     </div>
 
     <section id="capabilities">
       <div class="section-kicker">Everything it does</div>
       <h2>Eighteen things the app can do today.</h2>
       <p class="lede">Each card jumps to a section below with a mockup of the screen and the files it comes from.</p>
-      <div class="cap-grid"><a class="cap" href="#home"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></div><div><h3>Home dashboard</h3><p>Market status, index cards with sparklines, sentiment, and the latest trades.</p></div></a><a class="cap" href="#markets"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 1 0 18 9 9 0 0 1 0-18zM3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg></div><div><h3>Markets overview</h3><p>Sector performance, gainers and losers, forex pairs, crypto, and the Treasury curve.</p></div></a><a class="cap" href="#search"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4a7 7 0 1 1 0 14 7 7 0 0 1 0-14zM21 21l-4.3-4.3"/></svg></div><div><h3>Search and discovery</h3><p>Ticker search with a live fallback, recent searches, and curated sector lists.</p></div></a><a class="cap" href="#stock"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l5-6 4 3 6-8 3 3M3 21h18"/></svg></div><div><h3>Stock page and chart</h3><p>A live quote and a 1D to ALL chart with a crosshair you can scrub.</p></div></a><a class="cap" href="#fundamentals"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6"/></svg></div><div><h3>Full financial statements</h3><p>Income, balance sheet, and cash flow, annual or quarterly, with trend charts.</p></div></a><a class="cap" href="#ratios"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16M5 8h14M5 8l-3 6a3 3 0 0 0 6 0zM19 8l-3 6a3 3 0 0 0 6 0z"/></svg></div><div><h3>Ratios and analysis</h3><p>TTM ratios in six groups, compared against the industry where peer data exists.</p></div></a><a class="cap" href="#earnings"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V10M12 20V4M19 20v-7"/></svg></div><div><h3>Earnings</h3><p>EPS and revenue, actual against estimate, quarter by quarter.</p></div></a><a class="cap" href="#earnings"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 1 0 18 9 9 0 0 1 0-18zM12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8zM12 11.5v1"/></svg></div><div><h3>Analyst estimates</h3><p>Consensus label, recommendation mix, and a price target range.</p></div></a><a class="cap" href="#filings"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h13v14H6a2 2 0 0 1-2-2zM17 9h3v8a2 2 0 0 1-2 2M8 9h5M8 13h5"/></svg></div><div><h3>Stock news</h3><p>FMP and Alpaca stories fetched together, merged, and de-duplicated by URL.</p></div></a><a class="cap" href="#filings"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l3 3v15H6zM9 9h6M9 13h6M9 17h3"/></svg></div><div><h3>SEC filings and insiders</h3><p>Filings filtered by form type, plus Form 4 buys against sells.</p></div></a><a class="cap" href="#options"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg></div><div><h3>Options chain</h3><p>Expirations, calls and puts, bid and ask, open interest, IV, and Greeks.</p></div></a><a class="cap" href="#trades"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM2 20c0-3.3 3.1-6 7-6s7 2.7 7 6M16 4.5a3.5 3.5 0 0 1 0 6.5M18 14c2.3.6 4 2.9 4 6"/></svg></div><div><h3>Insider and Congress trades</h3><p>A market-wide disclosure feed you can search by trader, company, or ticker.</p></div></a><a class="cap" href="#calendars"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v15H4zM4 10h16M9 3v4M15 3v4"/></svg></div><div><h3>Calendars</h3><p>Earnings, macro events, IPOs, dividends, and splits by day.</p></div></a><a class="cap" href="#calendars"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg></div><div><h3>Macro events and indicators</h3><p>Actual, forecast, and previous, release history, and why each one matters.</p></div></a><a class="cap" href="#sentiment"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16a8 8 0 1 1 16 0M12 16l4-5"/></svg></div><div><h3>Fear and Greed</h3><p>CNN's sentiment index with history, seeded from a bundled data file.</p></div></a><a class="cap" href="#community"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg></div><div><h3>Community</h3><p>A post feed, topic communities, short courses, friends, and direct messages.</p></div></a><a class="cap" href="#assistant"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3M6 8h12v10H6zM9 12h.01M15 12h.01M9 15h6"/></svg></div><div><h3>AI assistant</h3><p>A FastAPI agent that answers in chat and calls six data tools.</p></div></a><a class="cap" href="#accounts"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 11h12v9H6zM8.5 11V8a3.5 3.5 0 0 1 7 0v3"/></svg></div><div><h3>Accounts and settings</h3><p>Clerk sign in, onboarding, light and dark themes, notifications, and an FAQ.</p></div></a></div>
+      <div class="cap-grid"><a class="cap" href="#home"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></div><div><h3>Home dashboard</h3><p>Market status, index cards with sparklines, sentiment, and the latest trades.</p></div></a><a class="cap" href="#markets"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 1 0 18 9 9 0 0 1 0-18zM3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg></div><div><h3>Markets overview</h3><p>Sector performance, gainers and losers, forex pairs, crypto, and the Treasury curve.</p></div></a><a class="cap" href="#search"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4a7 7 0 1 1 0 14 7 7 0 0 1 0-14zM21 21l-4.3-4.3"/></svg></div><div><h3>Search and discovery</h3><p>Ticker search with a live fallback, recent searches, and curated sector lists.</p></div></a><a class="cap" href="#stock"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l5-6 4 3 6-8 3 3M3 21h18"/></svg></div><div><h3>Stock page and chart</h3><p>A live quote and a 1D to ALL chart with a crosshair you can scrub.</p></div></a><a class="cap" href="#fundamentals"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6"/></svg></div><div><h3>Full financial statements</h3><p>Income, balance sheet, and cash flow, annual or quarterly, with trend charts.</p></div></a><a class="cap" href="#ratios"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16M5 8h14M5 8l-3 6a3 3 0 0 0 6 0zM19 8l-3 6a3 3 0 0 0 6 0z"/></svg></div><div><h3>Ratios and analysis</h3><p>TTM ratios in six groups, compared against the industry where peer data exists.</p></div></a><a class="cap" href="#earnings"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V10M12 20V4M19 20v-7"/></svg></div><div><h3>Earnings</h3><p>EPS and revenue, actual against estimate, quarter by quarter.</p></div></a><a class="cap" href="#earnings"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 1 0 18 9 9 0 0 1 0-18zM12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8zM12 11.5v1"/></svg></div><div><h3>Analyst estimates</h3><p>Consensus label, recommendation mix, and a price target range.</p></div></a><a class="cap" href="#filings"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h13v14H6a2 2 0 0 1-2-2zM17 9h3v8a2 2 0 0 1-2 2M8 9h5M8 13h5"/></svg></div><div><h3>Stock news</h3><p>Stories from two partnered data vendors, merged and de-duplicated by URL.</p></div></a><a class="cap" href="#filings"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l3 3v15H6zM9 9h6M9 13h6M9 17h3"/></svg></div><div><h3>SEC filings and insiders</h3><p>Filings filtered by form type, plus Form 4 buys against sells.</p></div></a><a class="cap" href="#options"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg></div><div><h3>Options chain</h3><p>Expirations, calls and puts, bid and ask, open interest, IV, and Greeks.</p></div></a><a class="cap" href="#trades"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM2 20c0-3.3 3.1-6 7-6s7 2.7 7 6M16 4.5a3.5 3.5 0 0 1 0 6.5M18 14c2.3.6 4 2.9 4 6"/></svg></div><div><h3>Insider and Congress trades</h3><p>A market-wide disclosure feed you can search by trader, company, or ticker.</p></div></a><a class="cap" href="#calendars"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v15H4zM4 10h16M9 3v4M15 3v4"/></svg></div><div><h3>Calendars</h3><p>Earnings, macro events, IPOs, dividends, and splits by day.</p></div></a><a class="cap" href="#calendars"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg></div><div><h3>Macro events and indicators</h3><p>Actual, forecast, and previous, release history, and why each one matters.</p></div></a><a class="cap" href="#sentiment"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16a8 8 0 1 1 16 0M12 16l4-5"/></svg></div><div><h3>Fear and Greed</h3><p>A market sentiment index with history, seeded from a bundled data file.</p></div></a><a class="cap" href="#community"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg></div><div><h3>Community</h3><p>A post feed, topic communities, short courses, friends, and direct messages.</p></div></a><a class="cap" href="#assistant"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3M6 8h12v10H6zM9 12h.01M15 12h.01M9 15h6"/></svg></div><div><h3>AI assistant</h3><p>A FastAPI agent that answers in chat and calls six data tools.</p></div></a><a class="cap" href="#accounts"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 11h12v9H6zM8.5 11V8a3.5 3.5 0 0 1 7 0v3"/></svg></div><div><h3>Accounts and settings</h3><p>Clerk sign in, onboarding, light and dark themes, notifications, and an FAQ.</p></div></a></div>
     </section>
 
     <div class="divider"><div class="section-kicker">Part one</div><span>The screens</span></div>
@@ -746,7 +766,7 @@ get_todays_earnings()</div>
         <h2>Sectors, movers, rates, currencies, and crypto.</h2>
         <p class="lede">The Markets tab is the wider lens. Everything here is filled by background jobs into Convex tables, so the screen reads from my own database instead of calling the data vendor every time it opens.</p>
         <ul class="points"><li><b>Sector performance</b> with a timeframe switch, and a sector list you can open into its stocks</li><li><b>Gainers, losers, and most active</b>, refreshed every two hours</li><li><b>Global indices</b> with an index detail sheet, plus <b>forex pairs</b> and <b>crypto snapshots</b></li><li><b>Treasury rates</b> drawn as a yield curve, and economic indicators like CPI, unemployment, GDP, and the fed funds rate</li></ul>
-        <p class="src">Built from <code>convex/markets/actions.ts</code> <code>convex/markets/queries.ts</code> <code>convex/lib/fmpMarkets.ts</code> <code>screens/Dashboard/IndexDetailModal.tsx</code></p>
+        <p class="src">Built from <code>convex/markets/actions.ts</code> <code>convex/markets/queries.ts</code> <code>screens/Dashboard/IndexDetailModal.tsx</code></p>
       </div>
       <div class="visual">
         <div class="panel-stack">
@@ -781,8 +801,8 @@ get_todays_earnings()</div>
         <div class="num">03</div>
         <div class="section-kicker">Search and discovery</div>
         <h2>Find a ticker even when it is not in my list yet.</h2>
-        <p class="lede">Search first looks through the stock universe I seed into Convex. If nothing matches, it asks Alpaca's asset search, and the ticker gets saved for next time.</p>
-        <ul class="points"><li><b>Fuzzy search</b> over seeded stocks ranked by market cap, with an Alpaca fallback for anything missing</li><li><b>Recent searches</b> stored per user</li><li><b>Curated sector lists</b> (Financials, Technology, Energy, Consumer, Healthcare) refreshed by a monthly job</li><li>Symbols are normalized for case and for hyphen or dot share classes, so <b>ms</b>, <b>Ms</b>, and <b>MS</b> all land on the same page</li></ul>
+        <p class="lede">Search first looks through the stock universe I seed into Convex. If nothing matches, it asks a partnered data vendor's asset search, and the ticker gets saved for next time.</p>
+        <ul class="points"><li><b>Fuzzy search</b> over seeded stocks ranked by market cap, with a vendor lookup as the fallback for anything missing</li><li><b>Recent searches</b> stored per user</li><li><b>Curated sector lists</b> (Financials, Technology, Energy, Consumer, Healthcare) refreshed by a monthly job</li><li>Symbols are normalized for case and for hyphen or dot share classes, so <b>ms</b>, <b>Ms</b>, and <b>MS</b> all land on the same page</li></ul>
         <p class="src">Built from <code>convex/search_bar/ticker_search/search.ts</code> <code>convex/discovery/functions.ts</code> <code>convex/lib/symbolNormalize.ts</code></p>
       </div>
       <div class="visual">
@@ -823,8 +843,8 @@ get_todays_earnings()</div>
         <div class="section-kicker">The stock page</div>
         <h2>One screen per ticker, nine ways to read it.</h2>
         <p class="lede">Tapping any ticker opens the stock page. I wanted it to feel like a light terminal: price on top, a chart you can actually touch, then tabs in the order I research a name.</p>
-        <ul class="points"><li>A <b>live quote and bars</b> from Alpaca, and a company profile from FMP that falls back to Alpaca when FMP is rate limited</li><li>A <b>wagmi chart</b> with a crosshair, haptic scrubbing, a gradient fill, and my own Y axis labels and gridlines</li><li><b>Seven ranges</b> from 1D to ALL, with open, high, low, and volume recalculated for the range you pick</li><li>Company info: sector, industry, exchange, CEO, employees, IPO date</li><li>Results are <b>cached for 60 seconds</b> on 1D and 5 minutes on longer ranges, and a stale copy is served if the vendor call fails</li></ul>
-        <p class="src">Built from <code>screens/StockDetails/StockDetailsScreen.tsx</code> <code>convex/stocks/actions.ts</code> <code>convex/lib/alpaca.ts</code> <code>utils/chartAxisFormat.ts</code></p>
+        <ul class="points"><li>A <b>live quote and bars</b> and a company profile from partnered data vendors, with a second source used when the first is rate limited</li><li>A <b>wagmi chart</b> with a crosshair, haptic scrubbing, a gradient fill, and my own Y axis labels and gridlines</li><li><b>Seven ranges</b> from 1D to ALL, with open, high, low, and volume recalculated for the range you pick</li><li>Company info: sector, industry, exchange, CEO, employees, IPO date</li><li>Results are <b>cached for 60 seconds</b> on 1D and 5 minutes on longer ranges, and a stale copy is served if the vendor call fails</li></ul>
+        <p class="src">Built from <code>screens/StockDetails/StockDetailsScreen.tsx</code> <code>convex/stocks/actions.ts</code> <code>utils/chartAxisFormat.ts</code></p>
       </div>
       <div class="visual">
         <div class="panel-stack">
@@ -859,8 +879,8 @@ get_todays_earnings()</div>
         <div class="section-kicker">Fundamentals</div>
         <h2>The full statements, not three rows of them.</h2>
         <p class="lede">Most free apps show revenue and net income and stop. I pull the whole income statement, balance sheet, and cash flow statement and lay them out the way a 10-K does, with charts on top for the story.</p>
-        <ul class="points"><li><b>Annual or quarterly</b> periods for all three statements, cached in Convex per symbol and period</li><li>Charts for the <b>margin waterfall</b>, assets mix over time, cash position and change, uses of cash, and debt maturity mix</li><li><b>Metric drilldowns</b>: tap a line item to see its history and a trend chart</li><li>FMP stable endpoints first, older v3 endpoints as a fallback, and a clear <b>Premium Data</b> state when the plan does not cover a symbol</li></ul>
-        <p class="src">Built from <code>screens/StockDetails/tabs/FundamentalsTab.tsx</code> <code>components/charts/WaterfallChart.tsx</code> <code>components/financials/MetricDrilldownPanel.tsx</code> <code>convex/lib/fmpFinancials.ts</code></p>
+        <ul class="points"><li><b>Annual or quarterly</b> periods for all three statements, cached in Convex per symbol and period</li><li>Charts for the <b>margin waterfall</b>, assets mix over time, cash position and change, uses of cash, and debt maturity mix</li><li><b>Metric drilldowns</b>: tap a line item to see its history and a trend chart</li><li>Newer vendor endpoints first, older ones as a fallback, and a clear <b>Premium Data</b> state when the plan does not cover a symbol</li></ul>
+        <p class="src">Built from <code>screens/StockDetails/tabs/FundamentalsTab.tsx</code> <code>components/charts/WaterfallChart.tsx</code> <code>components/financials/MetricDrilldownPanel.tsx</code> <code>convex/stocks/financials.ts</code></p>
       </div>
       <div class="visual">
         <div class="panel-stack">
@@ -891,7 +911,7 @@ get_todays_earnings()</div>
         <div class="section-kicker">Ratios and analysis</div>
         <h2>Context for every number.</h2>
         <p class="lede">A ratio means little alone, so the ratios tab puts the stock next to its industry where I have peer data. The analysis tab rolls the same data into a one page read.</p>
-        <ul class="points"><li>All <b>TTM ratio fields</b> from FMP, grouped into valuation, profitability, liquidity, leverage, efficiency, and growth</li><li><b>YoY growth</b> for revenue, EPS, and free cash flow, computed from cached statements</li><li>The stock against <b>industry ratios</b>, plus a peers list</li><li>The analysis tab: more than 40 metrics from P/E, PEG, and EV/EBITDA to ROIC and the operating cycle, plus a plain <b>valuation label</b></li></ul>
+        <ul class="points"><li>All <b>TTM ratio fields</b> from a partnered data vendor, grouped into valuation, profitability, liquidity, leverage, efficiency, and growth</li><li><b>YoY growth</b> for revenue, EPS, and free cash flow, computed from cached statements</li><li>The stock against <b>industry ratios</b>, plus a peers list</li><li>The analysis tab: more than 40 metrics from P/E, PEG, and EV/EBITDA to ROIC and the operating cycle, plus a plain <b>valuation label</b></li></ul>
         <p class="src">Built from <code>screens/StockDetails/tabs/RatiosTab.tsx</code> <code>screens/StockDetails/tabs/AnalysisTab.tsx</code> <code>convex/stocks/ratios.ts</code> <code>convex/stocks/peers.ts</code></p>
       </div>
       <div class="visual">
@@ -910,7 +930,7 @@ get_todays_earnings()</div>
         <div class="section-kicker">Earnings and analyst estimates</div>
         <h2>Did they beat, and what does the Street expect?</h2>
         <p class="lede">Earnings season is when I use the app most. The earnings tab shows recent quarters against estimates, and the analyst tab shows where coverage sits today.</p>
-        <ul class="points"><li><b>EPS and revenue</b>, actual against estimate, with beat and miss coloring</li><li>A daily job syncs the <b>earnings calendar</b> 14 days back and 14 days ahead, filtered to tickers Alpaca can actually trade</li><li>An <b>Earnings tab</b> on the dashboard to browse who reports each day, with live search</li><li><b>Analyst consensus</b>, a recommendation mix bar, EPS estimate history, and a low, average, high <b>price target range</b></li></ul>
+        <ul class="points"><li><b>EPS and revenue</b>, actual against estimate, with beat and miss coloring</li><li>A daily job syncs the <b>earnings calendar</b> 14 days back and 14 days ahead, filtered to tickers that can actually be traded</li><li>An <b>Earnings tab</b> on the dashboard to browse who reports each day, with live search</li><li><b>Analyst consensus</b>, a recommendation mix bar, EPS estimate history, and a low, average, high <b>price target range</b></li></ul>
         <p class="src">Built from <code>screens/StockDetails/tabs/EarningsTab.tsx</code> <code>screens/StockDetails/tabs/AnalystsTab.tsx</code> <code>convex/earnings/actions.ts</code> <code>components/charts/PriceTargetRange.tsx</code></p>
       </div>
       <div class="visual">
@@ -946,7 +966,7 @@ get_todays_earnings()</div>
         <div class="section-kicker">News, filings, and insiders</div>
         <h2>The primary sources, one tap away.</h2>
         <p class="lede">I like reading the filing, not just the headline about it. These three tabs keep news, SEC documents, and insider activity next to the chart.</p>
-        <ul class="points"><li><b>Stock news</b> from FMP and Alpaca fetched at the same time, merged, de-duplicated by URL, and sorted by time</li><li>A market news feed synced every 15 minutes, with old stories cleared after 7 days</li><li><b>SEC filings</b> from a rolling 90 day window, with filter pills by form type, opening the document in an in-app browser</li><li><b>Insiders</b>: a buys against sells summary and a transactions list, falling back to raw Form 4 filings when the insider endpoint is not available</li></ul>
+        <ul class="points"><li><b>Stock news</b> from two partnered data vendors fetched at the same time, merged, de-duplicated by URL, and sorted by time</li><li>A market news feed synced every 15 minutes, with old stories cleared after 7 days</li><li><b>SEC filings</b> from a rolling 90 day window, with filter pills by form type, opening the document in an in-app browser</li><li><b>Insiders</b>: a buys against sells summary and a transactions list, falling back to raw Form 4 filings when the insider endpoint is not available</li></ul>
         <p class="src">Built from <code>screens/StockDetails/tabs/NewsTab.tsx</code> <code>convex/stocks/stockNews.ts</code> <code>screens/StockDetails/tabs/SECFilingsTab.tsx</code> <code>screens/StockDetails/tabs/InsidersTab.tsx</code></p>
       </div>
       <div class="visual">
@@ -975,9 +995,9 @@ get_todays_earnings()</div>
         <div class="num">09</div>
         <div class="section-kicker">Options chain</div>
         <h2>Contracts, quotes, and Greeks in one table.</h2>
-        <p class="lede">The options tab joins two Alpaca calls: the list of contracts, and live snapshots for those contracts. Putting them together gives one row per strike that I can scan quickly.</p>
+        <p class="lede">The options tab joins two vendor calls: the list of contracts, and live snapshots for those contracts. Putting them together gives one row per strike that I can scan quickly.</p>
         <ul class="points"><li>A horizontal row of <b>expiration dates</b></li><li>A <b>Calls, Puts, All</b> toggle</li><li>Bid, ask, volume, open interest, <b>implied volatility</b>, and <b>Greeks</b> per contract</li><li><b>In the money</b> rows highlighted against the current price</li></ul>
-        <p class="src">Built from <code>screens/StockDetails/tabs/OptionsTab.tsx</code> <code>convex/stocks/options.ts</code> <code>convex/lib/alpaca.ts</code></p>
+        <p class="src">Built from <code>screens/StockDetails/tabs/OptionsTab.tsx</code> <code>convex/stocks/options.ts</code></p>
       </div>
       <div class="visual">
         <div class="panel">
@@ -996,7 +1016,7 @@ get_todays_earnings()</div>
         <h2>Who is buying, across the whole market.</h2>
         <p class="lede">This screen started as a per-stock insider list and grew into a market-wide feed. It also carries U.S. congressional trading disclosures.</p>
         <ul class="points"><li><b>Insider trades</b> from SEC Form 4 data, with Form 3 filings and non open market events (awards, gifts, option exercises) filtered out</li><li><b>Congress trades</b> from public financial disclosures</li><li>Search by <b>trader, company, or ticker</b>, with labels for purchase, sale, gift, grant, tax withholding, and more</li><li>Synced every five hours, with a unique ID per trade so reruns do not create duplicates, and a check that keeps bad future dates from breaking the sort</li></ul>
-        <p class="src">Built from <code>screens/Dashboard/GlobalTradesScreen.tsx</code> <code>convex/globalTrades.ts</code> <code>convex/globalTradesActions.ts</code> <code>convex/lib/fmpGlobalTrades.ts</code></p>
+        <p class="src">Built from <code>screens/Dashboard/GlobalTradesScreen.tsx</code> <code>convex/globalTrades.ts</code> <code>convex/globalTradesActions.ts</code></p>
       </div>
       <div class="visual">
         <div class="device phone" role="img" aria-label="Insider and Congress trades mockup">
@@ -1062,7 +1082,7 @@ get_todays_earnings()</div>
         <div class="num">12</div>
         <div class="section-kicker">Market sentiment</div>
         <h2>A quick read on mood.</h2>
-        <p class="lede">The Fear and Greed gauge is the one number I check before anything else. It uses CNN's index data, stored in my own table so the dashboard never waits on it.</p>
+        <p class="lede">The Fear and Greed gauge is the one number I check before anything else. The index data comes from a partnered data vendor and is stored in my own table so the dashboard never waits on it.</p>
         <ul class="points"><li>A gauge from <b>Extreme Fear to Extreme Greed</b>, synced every four hours</li><li>Comparisons to <b>previous close, one week, one month, and one year</b> ago</li><li>History you can slide through on the dashboard</li><li>A <b>bundled history file</b> and seed scripts, so a fresh deployment fills the table on its own if it is empty</li></ul>
         <p class="src">Built from <code>convex/markets/fearGreed.ts</code> <code>data/fear_greed_historical.tsv.gz</code> <code>scripts/seed-fear-greed-from-asset.cjs</code></p>
       </div>
@@ -1158,21 +1178,6 @@ get_todays_earnings()</div>
     </section>
     <div class="divider"><div class="section-kicker">Part two</div><span>Under the hood</span></div>
 
-    <section id="pipeline">
-      <div class="section-kicker">Data pipeline</div>
-      <h2>Fetch on a schedule, store once, read many times.</h2>
-      <p class="lede">The phone almost never calls a data vendor directly. Convex actions fetch on a timer and write into tables, and the app subscribes to queries over those tables. That kept me inside the FMP plan's rate limits and made screens open fast.</p>
-      <div class="diagram">
-        <svg class="diagram-wide" viewBox="0 0 960 290" role="img" aria-label="Market Lantern data pipeline"><defs><marker id="pa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#6B21A8"/></marker></defs><text x="8" y="18" text-anchor="start" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#9CA3AF">SOURCES</text><text x="236" y="18" text-anchor="start" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#9CA3AF">CONVEX BACKEND</text><text x="800" y="18" text-anchor="start" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#9CA3AF">CLIENTS</text><rect x="8" y="34" width="180" height="64" rx="8" fill="#fff" stroke="#E5E7EB"/><text x="98.0" y="63.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#111827">Financial Modeling Prep</text><text x="98.0" y="80.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563">fundamentals, news, calendars</text><rect x="8" y="118" width="180" height="64" rx="8" fill="#fff" stroke="#E5E7EB"/><text x="98.0" y="147.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#111827">Alpaca Markets</text><text x="98.0" y="164.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563">quotes, bars, options, news</text><rect x="8" y="202" width="180" height="64" rx="8" fill="#fff" stroke="#E5E7EB"/><text x="98.0" y="231.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#111827">CNN Fear &amp; Greed</text><text x="98.0" y="248.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563">sentiment history</text><line x1="188" y1="66" x2="234" y2="110" stroke="#6B21A8" stroke-width="1.5" marker-end="url(#pa)"/><line x1="188" y1="150" x2="234" y2="150" stroke="#6B21A8" stroke-width="1.5" marker-end="url(#pa)"/><line x1="188" y1="234" x2="234" y2="190" stroke="#6B21A8" stroke-width="1.5" marker-end="url(#pa)"/><rect x="236" y="70" width="200" height="160" rx="8" fill="#F3F0FF" stroke="#6B21A8"/><text x="336.0" y="147.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="#111827">Actions</text><text x="336.0" y="164.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563">28 scheduled jobs</text><text x="336" y="186" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="400" fill="#4B5563">plus on-demand fetches</text><text x="336" y="202" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="400" fill="#4B5563">with cache-first reads</text><line x1="436" y1="150" x2="482" y2="150" stroke="#6B21A8" stroke-width="1.5" marker-end="url(#pa)"/><rect x="484" y="70" width="180" height="160" rx="8" fill="#fff" stroke="#E5E7EB"/><text x="574.0" y="147.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="#111827">44 tables</text><text x="574.0" y="164.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563">stocks, candles, news, trades,</text><text x="574" y="186" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="400" fill="#4B5563">calendars, financials,</text><text x="574" y="202" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="400" fill="#4B5563">community, apiCache</text><line x1="664" y1="150" x2="708" y2="150" stroke="#6B21A8" stroke-width="1.5" marker-end="url(#pa)"/><rect x="710" y="110" width="74" height="80" rx="8" fill="#fff" stroke="#E5E7EB"/><text x="747.0" y="155.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#111827">Queries</text><line x1="784" y1="136" x2="798" y2="96" stroke="#6B21A8" stroke-width="1.5" marker-end="url(#pa)"/><line x1="784" y1="164" x2="798" y2="204" stroke="#6B21A8" stroke-width="1.5" marker-end="url(#pa)"/><rect x="800" y="40" width="152" height="80" rx="8" fill="#fff" stroke="#E5E7EB"/><text x="876.0" y="77.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#111827">Mobile app</text><text x="876.0" y="94.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563">live subscriptions</text><rect x="800" y="166" width="152" height="80" rx="8" fill="#fff" stroke="#E5E7EB"/><text x="876.0" y="203.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#111827">AI agent</text><text x="876.0" y="220.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563">Python Convex client</text><text x="336" y="258" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="400" fill="#6B21A8">skip when market is closed · write only on change</text></svg>
-        <svg class="diagram-tall" viewBox="0 0 360 560" role="img" aria-label="Market Lantern data pipeline"><defs><marker id="pb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#6B21A8"/></marker></defs><rect x="4" y="8" width="112" height="62" rx="8" fill="#fff" stroke="#E5E7EB"/><text x="60.0" y="36.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#111827">FMP</text><text x="60.0" y="53.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563">fundamentals</text><rect x="124" y="8" width="112" height="62" rx="8" fill="#fff" stroke="#E5E7EB"/><text x="180.0" y="36.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#111827">Alpaca</text><text x="180.0" y="53.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563">quotes, options</text><rect x="244" y="8" width="112" height="62" rx="8" fill="#fff" stroke="#E5E7EB"/><text x="300.0" y="36.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#111827">CNN</text><text x="300.0" y="53.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563">fear &amp; greed</text><line x1="60" y1="70" x2="140" y2="108" stroke="#6B21A8" stroke-width="1.5" marker-end="url(#pb)"/><line x1="180" y1="70" x2="180" y2="108" stroke="#6B21A8" stroke-width="1.5" marker-end="url(#pb)"/><line x1="300" y1="70" x2="220" y2="108" stroke="#6B21A8" stroke-width="1.5" marker-end="url(#pb)"/><rect x="40" y="110" width="280" height="74" rx="8" fill="#F3F0FF" stroke="#6B21A8"/><text x="180.0" y="144.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="#111827">Convex actions</text><text x="180.0" y="161.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563">28 scheduled jobs, cache-first</text><line x1="180" y1="184" x2="180" y2="214" stroke="#6B21A8" stroke-width="1.5" marker-end="url(#pb)"/><rect x="40" y="216" width="280" height="74" rx="8" fill="#fff" stroke="#E5E7EB"/><text x="180.0" y="250.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="#111827">44 tables</text><text x="180.0" y="267.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563">market data, community, apiCache</text><line x1="180" y1="290" x2="180" y2="320" stroke="#6B21A8" stroke-width="1.5" marker-end="url(#pb)"/><rect x="40" y="322" width="280" height="62" rx="8" fill="#fff" stroke="#E5E7EB"/><text x="180.0" y="350.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="#111827">Queries</text><text x="180.0" y="367.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563">reactive reads</text><line x1="130" y1="384" x2="95" y2="420" stroke="#6B21A8" stroke-width="1.5" marker-end="url(#pb)"/><line x1="230" y1="384" x2="265" y2="420" stroke="#6B21A8" stroke-width="1.5" marker-end="url(#pb)"/><rect x="4" y="422" width="170" height="70" rx="8" fill="#fff" stroke="#E5E7EB"/><text x="89.0" y="454.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#111827">Mobile app</text><text x="89.0" y="471.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563">live subscriptions</text><rect x="186" y="422" width="170" height="70" rx="8" fill="#fff" stroke="#E5E7EB"/><text x="271.0" y="454.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#111827">AI agent</text><text x="271.0" y="471.0" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563">Python client</text><text x="180" y="526" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="400" fill="#6B21A8">skip when market is closed</text><text x="180" y="544" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="400" fill="#6B21A8">write only when a price moved</text></svg>
-        <p class="diagram-note">Deployment URLs and keys are left out of this page.</p>
-      </div>
-      <h3 style="font-size:16px;font-weight:600;margin-top:36px">The schedule</h3>
-      <p class="lede" style="font-size:15px">All 28 jobs live in one file. I tuned each interval to how often the data really changes.</p>
-      <div class="lanes"><div class="lane"><div class="when">Every minute<small>market hours only</small></div><div class="jobs"><span class=job>Top 100 stock prices</span></div></div><div class="lane"><div class="when">Every 15 minutes</div><div class="jobs"><span class=job>Market news</span></div></div><div class="lane"><div class="when">Every 2 hours</div><div class="jobs"><span class=job>Gainers, losers, most active</span><span class=job>Crypto snapshots</span></div></div><div class="lane"><div class="when">Every 4 to 6 hours</div><div class="jobs"><span class=job>Sector performance (4h)</span><span class=job>Fear and Greed (4h)</span><span class=job>Insider and Congress trades (5h)</span><span class=job>Global indices (6h)</span></div></div><div class="lane"><div class="when">Every 12 hours</div><div class="jobs"><span class=job>Economic indicators</span><span class=job>Treasury rates</span></div></div><div class="lane"><div class="when">Daily</div><div class="jobs"><span class=job>Earnings calendar, 14 days each way</span><span class=job>Macro calendar</span><span class=job>IPOs</span><span class=job>Dividends</span><span class=job>Splits</span><span class=job>Forex pairs</span><span class=job>News cleanup (7 days)</span><span class=job>Seed checks for stocks and Fear and Greed</span></div></div><div class="lane"><div class="when">Open and close<small>weekdays</small></div><div class="jobs"><span class=job>Market status, 3 runs at 9:30 and 3 at 4:00 ET</span></div></div><div class="lane"><div class="when">Longer</div><div class="jobs"><span class=job>Earnings cleanup (every 3 days)</span><span class=job>Discovery lists (monthly)</span><span class=job>Stock universe reseed (yearly)</span></div></div></div>
-      <p class="src">Built from <code>convex/crons.ts</code> <code>convex/stocks/sync.ts</code> <code>convex/markets/sync.ts</code> <code>convex/news/actions.ts</code></p>
-    </section>
-
     <section id="backend">
       <div class="section-kicker">Backend</div>
       <h2>Forty-four tables, grouped by job.</h2>
@@ -1184,8 +1189,8 @@ get_todays_earnings()</div>
       <div class="decisions">
         <div class="decision"><div class="n">a</div><h3>Skip when the market is closed</h3><p>The one minute price job reads the market status first and exits when the U.S. market is closed. Only the top 100 stocks by market cap are refreshed.</p></div>
         <div class="decision"><div class="n">b</div><h3>Write only what moved</h3><p>Incoming prices are compared with what is stored, and a row is written only when the price or change actually moved. Writes go in batches of 100.</p></div>
-        <div class="decision"><div class="n">c</div><h3>Cache first, stale on failure</h3><p>Stock details check a shared apiCache table before calling Alpaca or FMP: 60 seconds for intraday, 5 minutes for longer ranges. If a fetch fails, the last good copy is returned.</p></div>
-        <div class="decision"><div class="n">d</div><h3>A fallback for every vendor call</h3><p>FMP stable endpoints fall back to v3, company profiles fall back from FMP to Alpaca, and insiders fall back to Form 4 filings. A 402 response marks the symbol as premium so the screen shows a message instead of crashing, and empty results are never cached.</p></div>
+        <div class="decision"><div class="n">c</div><h3>Cache first, stale on failure</h3><p>Stock details check a shared apiCache table before calling a vendor: 60 seconds for intraday, 5 minutes for longer ranges. If a fetch fails, the last good copy is returned.</p></div>
+        <div class="decision"><div class="n">d</div><h3>A fallback for every vendor call</h3><p>Newer endpoints fall back to older ones, company profiles fall back to a second vendor, and insiders fall back to Form 4 filings. A 402 response marks the symbol as premium so the screen shows a message instead of crashing, and empty results are never cached.</p></div>
       </div>
       <p class="src">Built from <code>convex/stocks/actions.ts</code> <code>convex/stocks/sync.ts</code> <code>convex/apiCache.ts</code> <code>convex/stocks/financials.ts</code></p>
     </section>
@@ -1205,7 +1210,7 @@ get_todays_earnings()</div>
         <div class="tools-wrap">
           <table class="t">
             <tr><th style="text-align:left">Tool</th><th style="text-align:left">Input</th><th style="text-align:left">Reads from</th><th style="text-align:left">Used for</th></tr>
-            <tr><td><code>get_market_status</code></td><td>none</td><td><code>stocks/functions:getMarketStatus</code></td><td>Is the U.S. market open, and the overall trend</td></tr><tr><td><code>search_stocks</code></td><td>query</td><td><code>stocks/functions:searchStocks</code></td><td>Find a stock by symbol or name</td></tr><tr><td><code>get_earnings</code></td><td>symbol</td><td><code>earnings/functions:getBySymbol</code></td><td>Earnings data for one ticker</td></tr><tr><td><code>get_todays_earnings</code></td><td>none</td><td><code>earnings/functions:getToday</code></td><td>Every company reporting today</td></tr><tr><td><code>get_market_news</code></td><td>category</td><td><code>news/functions:getNews</code></td><td>Latest headlines: general, forex, crypto, merger, or all</td></tr><tr><td><code>search_web</code></td><td>query</td><td>DuckDuckGo results</td><td>Live info that is not in the database</td></tr>
+            <tr><td><code>get_market_status</code></td><td>none</td><td><code>stocks/functions:getMarketStatus</code></td><td>Is the U.S. market open, and the overall trend</td></tr><tr><td><code>search_stocks</code></td><td>query</td><td><code>stocks/functions:searchStocks</code></td><td>Find a stock by symbol or name</td></tr><tr><td><code>get_earnings</code></td><td>symbol</td><td><code>earnings/functions:getBySymbol</code></td><td>Earnings data for one ticker</td></tr><tr><td><code>get_todays_earnings</code></td><td>none</td><td><code>earnings/functions:getToday</code></td><td>Every company reporting today</td></tr><tr><td><code>get_market_news</code></td><td>category</td><td><code>news/functions:getNews</code></td><td>Latest headlines: general, forex, crypto, merger, or all</td></tr><tr><td><code>search_web</code></td><td>query</td><td>Web search results</td><td>Live info that is not in the database</td></tr>
           </table>
         </div>
       </div>
@@ -1231,7 +1236,7 @@ get_todays_earnings()</div>
 
           <rect x="398" y="70" width="160" height="68" rx="8" fill="#fff" stroke="#E5E7EB"/>
           <text x="478" y="99" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#111827">Language model</text>
-          <text x="478" y="117" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563">OpenRouter or Ollama</text>
+          <text x="478" y="117" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563">A hosted model</text>
 
           <line x1="478" y1="138" x2="478" y2="164" stroke="#6B21A8" stroke-width="1.5" marker-end="url(#arr)"/>
 
@@ -1273,7 +1278,7 @@ get_todays_earnings()</div>
 
           <rect x="40" y="184" width="280" height="62" rx="8" fill="#fff" stroke="#E5E7EB"/>
           <text x="180" y="210" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="#111827">Language model</text>
-          <text x="180" y="228" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#4B5563">OpenRouter or Ollama</text>
+          <text x="180" y="228" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#4B5563">A hosted model</text>
           <line x1="180" y1="246" x2="180" y2="270" stroke="#6B21A8" stroke-width="1.5" marker-end="url(#arr2)"/>
 
           <rect x="40" y="272" width="280" height="62" rx="8" fill="#fff" stroke="#E5E7EB"/>
@@ -1308,7 +1313,7 @@ get_todays_earnings()</div>
         <p>You are "Market Lantern AI", a professional financial assistant for Market Lantern customers. Speak directly to the user. Be helpful, polite, and professional. Do not output internal monologue. Use tools only when needed for data.</p>
         <cite>System prompt, from the project</cite>
       </blockquote>
-      <p class="src">Built from <code>ai-agent/main.py</code> <code>ai-agent/main_ollama.py</code> <code>ai-agent/tools/convex_tool.py</code> <code>ai-agent/tools/web_tool.py</code> <code>screens/Agent/AgentChatScreen.tsx</code></p>
+      <p class="src">Built from <code>ai-agent/main.py</code> <code>ai-agent/tools/convex_tool.py</code> <code>ai-agent/tools/web_tool.py</code> <code>screens/Agent/AgentChatScreen.tsx</code></p>
     </section>
 
     <section id="stack">
@@ -1324,9 +1329,8 @@ get_todays_earnings()</div>
         <div><b>Convex</b><span>Database, actions, crons, live queries</span></div>
         <div><b>Clerk</b><span>Authentication</span></div>
         <div><b>Python, FastAPI</b><span>AI agent service</span></div>
-        <div><b>OpenRouter or Ollama</b><span>Hosted or local model</span></div>
-        <div><b>Financial Modeling Prep</b><span>Fundamentals, news, calendars, trades</span></div>
-        <div><b>Alpaca Markets</b><span>Quotes, bars, options, news</span></div>
+        <div><b>Hosted language model</b><span>Answers in chat</span></div>
+        <div><b>Partnered data vendors</b><span>Quotes, fundamentals, news, calendars, trades</span></div>
       </div>
     </section>
 
