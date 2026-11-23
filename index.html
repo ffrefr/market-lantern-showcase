@@ -3,526 +3,626 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Showcase of Market Lantern, an AI-powered equity research app and tool-using financial assistant by Enis Bozkurt." />
-  <title>Market Lantern — AI Work Sample · Enis Bozkurt</title>
+  <meta name="description" content="Market Lantern, an equity research app and in-app assistant by Enis Bozkurt." />
+  <title>Market Lantern, a project by Enis Bozkurt</title>
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
   <style>
     :root {
-      --primary: #7C3AED;
-      --primary-light: #A78BFA;
-      --primary-bg: rgba(124, 58, 237, 0.18);
+      --primary: #6B21A8;
+      --primary-bg: #F3F0FF;
       --success: #10B981;
-      --info: #3B82F6;
-      --text: #E5E7EB;
-      --text-2: #CBD5E1;
-      --muted: #94A3B8;
-      --surface: #1B2434;
-      --surface-alt: #222E43;
-      --border: #2E3A52;
-      --bg: #0F1624;
-      --bg-alt: #141C2E;
+      --text: #111827;
+      --text-2: #4B5563;
+      --muted: #9CA3AF;
+      --surface: #FFFFFF;
+      --surface-alt: #F3F4F6;
+      --border: #E5E7EB;
+      --bg: #F5F6FA;
       --white: #FFFFFF;
+      --shadow: 0 18px 40px -12px rgba(17, 24, 39, 0.18);
+      --sans: Inter, "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", Georgia, serif;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
-
     body {
-      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: var(--sans);
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
-      min-height: 100vh;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
+    img { display: block; max-width: 100%; }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
-    a { color: var(--primary-light); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    .page { max-width: 1180px; margin: 0 auto; padding: 0 32px 96px; }
 
-    .wrap {
-      max-width: 920px;
-      margin: 0 auto;
-      padding: 28px 22px 80px;
-    }
-
-    header {
+    .site-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      padding-bottom: 28px;
+      padding: 18px 0 16px;
       border-bottom: 1px solid var(--border);
     }
-
-    .brand {
+    .lockup {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       color: var(--text);
       text-decoration: none;
     }
-
-    .brand:hover { text-decoration: none; }
-
-    .mark {
-      width: 40px;
-      height: 40px;
-      flex-shrink: 0;
-    }
-
-    .brand-name {
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      font-size: 15px;
-    }
-
-    .brand-sub {
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    nav { display: flex; gap: 18px; flex-wrap: wrap; }
-    nav a { color: var(--muted); font-size: 13px; }
-    nav a:hover { color: var(--text); text-decoration: none; }
+    .lockup:hover { text-decoration: none; }
+    .lockup img { height: 32px; width: auto; }
+    .lockup span { font-weight: 600; font-size: 15px; letter-spacing: -0.02em; }
+    .byline { font-size: 13px; color: var(--text-2); display: flex; align-items: center; gap: 10px; }
+    .byline a { color: var(--text); font-weight: 500; }
 
     .hero {
-      padding: 56px 0 40px;
+      display: grid;
+      grid-template-columns: minmax(280px, 0.92fr) minmax(420px, 1.15fr);
+      gap: 40px 28px;
+      align-items: center;
+      padding: 56px 0 8px;
     }
-
-    .eyebrow {
-      display: inline-block;
+    .kicker, .section-kicker {
       font-size: 11px;
-      letter-spacing: 0.12em;
+      font-weight: 600;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--primary-light);
-      background: var(--primary-bg);
-      border: 1px solid rgba(167, 139, 250, 0.25);
-      border-radius: 999px;
-      padding: 5px 12px;
-      margin-bottom: 18px;
+      color: var(--primary);
     }
+    .kicker { margin-bottom: 16px; }
+    .section-kicker { margin-bottom: 10px; }
 
     h1 {
-      font-size: clamp(36px, 6vw, 56px);
-      line-height: 1.08;
-      letter-spacing: -0.03em;
-      font-weight: 700;
-      margin-bottom: 16px;
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(34px, 4.3vw, 50px);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+      max-width: 16ch;
     }
-
-    .pitch {
-      font-size: 20px;
-      color: var(--text-2);
-      max-width: 38rem;
-      line-height: 1.45;
-    }
-
-    section {
-      padding: 36px 0;
-      border-top: 1px solid var(--border);
-    }
-
     h2 {
-      font-size: 13px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--primary-light);
-      margin-bottom: 14px;
-      font-weight: 600;
+      font-family: var(--serif);
+      font-size: clamp(26px, 3vw, 34px);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
     }
+    .lede { color: var(--text-2); font-size: 17px; max-width: 38rem; }
+    .lede + .lede { margin-top: 12px; }
+    .fine { margin-top: 18px; font-size: 13px; color: var(--muted); }
 
-    h3 {
-      font-size: 18px;
-      font-weight: 600;
-      margin: 20px 0 10px;
-    }
-
-    p, li { color: var(--text-2); font-size: 16px; }
-    p + p { margin-top: 12px; }
-
-    ul.plain {
-      padding-left: 1.15rem;
+    /* Phones sit side by side, both fully readable */
+    .stage {
       display: grid;
-      gap: 8px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px 16px 14px;
-    }
-
-    .card strong {
-      display: block;
-      color: var(--white);
-      font-size: 14px;
-      margin-bottom: 4px;
-    }
-
-    .card span {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.45;
-    }
-
-    /* Pipeline */
-    .pipeline {
-      display: grid;
-      gap: 10px;
-      margin-top: 8px;
-    }
-
-    .step {
-      display: grid;
-      grid-template-columns: 52px 1fr;
-      gap: 14px;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
       align-items: start;
+    }
+    .device-chat { margin-top: 72px; }
+    .device {
       background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px 16px;
-      position: relative;
+      border: 1px solid #d5d9e1;
+      border-radius: 36px;
+      padding: 8px 7px 12px;
+      box-shadow: var(--shadow);
+      color: var(--text);
     }
-
-    .step-num {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: var(--primary-bg);
-      color: var(--primary-light);
+    .device-screen {
+      background: var(--bg);
+      border-radius: 28px;
+      overflow: hidden;
+    }
+    .island {
+      width: 78px;
+      height: 16px;
+      background: #111827;
+      border-radius: 20px;
+      margin: 8px auto 2px;
+    }
+    .status {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 13px;
+      padding: 0 16px 6px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .sig { display: flex; align-items: center; gap: 4px; color: var(--text); }
+
+    .icon-btn {
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      width: 28px;
+      height: 28px;
+      font-size: 18px;
+      line-height: 1;
+      cursor: default;
+    }
+    .icon-btn.muted { color: var(--text-2); }
+
+    .q-head, .c-head { display: flex; align-items: center; padding: 0 8px 6px; }
+    .q-head .spacer { flex: 1; }
+
+    .identity { display: flex; align-items: center; gap: 8px; padding: 0 14px 6px; }
+    .letter {
+      width: 30px; height: 30px; border-radius: 15px;
+      background: var(--primary-bg); color: var(--primary);
+      font-weight: 700; font-size: 13px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .sym { font-size: 13px; font-weight: 800; }
+    .co { font-size: 11px; color: var(--text-2); font-weight: 500; margin-left: auto; }
+
+    .px { padding: 0 14px; }
+    .price { font-size: 28px; font-weight: 700; letter-spacing: -0.04em; line-height: 1.1; }
+    .chg { margin-top: 3px; font-size: 12px; font-weight: 600; color: var(--success); }
+    .chg span { color: var(--muted); font-weight: 500; margin-left: 6px; }
+
+    .qstats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; padding: 10px 14px 0; }
+    .qstat { background: var(--surface); border-radius: 8px; padding: 7px 4px; text-align: center; }
+    .qstat b { display: block; font-size: 11px; font-weight: 700; }
+    .qstat span { font-size: 8.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+
+    .chart-wrap { display: grid; grid-template-columns: 1fr 28px; gap: 0; padding: 10px 8px 0 10px; align-items: stretch; }
+    .chart-wrap svg { width: 100%; height: 118px; display: block; }
+    .yaxis {
+      display: flex; flex-direction: column; justify-content: space-between;
+      font-size: 8px; color: var(--muted); font-weight: 500; text-align: right;
+      padding: 2px 2px 14px 0;
+    }
+    .chart-caption {
+      grid-column: 1 / -1;
+      text-align: center;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 2px;
     }
 
-    .step h3 { margin: 2px 0 4px; font-size: 15px; color: var(--white); }
-    .step p { font-size: 14px; }
+    .tfs {
+      display: flex; justify-content: space-between;
+      margin: 10px 12px 0; background: var(--surface-alt);
+      border-radius: 10px; padding: 3px;
+    }
+    .tfs span {
+      flex: 1; text-align: center; font-size: 9.5px; font-weight: 600;
+      color: var(--text-2); padding: 6px 0; border-radius: 8px;
+    }
+    .tfs span.on { background: var(--primary); color: var(--white); }
+
+    .tabs {
+      display: flex; gap: 12px; padding: 12px 14px 14px; overflow: hidden;
+      border-top: 1px solid var(--border); margin-top: 10px;
+    }
+    .tabs span { font-size: 11px; font-weight: 600; color: var(--muted); padding-bottom: 6px; white-space: nowrap; }
+    .tabs span.on { color: var(--primary); border-bottom: 2px solid var(--primary); }
+
+    .c-head { background: var(--surface); border-bottom: 1px solid var(--border); padding: 2px 8px 10px; gap: 6px; }
+    .c-head .title-wrap { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .c-head img { width: 20px; height: 20px; object-fit: contain; }
+    .c-head strong { font-size: 12px; font-weight: 600; }
+    .thread { padding: 12px 10px 8px; display: flex; flex-direction: column; gap: 8px; background: var(--bg); }
+    .bubble { max-width: 88%; padding: 9px 11px; border-radius: 16px; font-size: 11.5px; line-height: 1.45; }
+    .bubble.agent { align-self: flex-start; background: var(--surface); border: 1px solid var(--border); border-bottom-left-radius: 4px; }
+    .bubble.user { align-self: flex-end; background: var(--primary); color: var(--white); border-bottom-right-radius: 4px; }
+    .bubble.tool {
+      align-self: flex-start; border: 1px dashed #c5cad3; background: transparent;
+      color: var(--text-2); font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 10px; border-radius: 8px; white-space: pre-line;
+    }
+    .tag { font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 3px; }
+    .composer {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 10px 6px; background: var(--surface); border-top: 1px solid var(--border);
+    }
+    .composer .field {
+      flex: 1; height: 32px; border-radius: 16px; border: 1px solid var(--border);
+      color: var(--muted); font-size: 10.5px; display: flex; align-items: center; padding: 0 12px;
+    }
+    .send {
+      width: 32px; height: 32px; border-radius: 16px; background: var(--primary); color: white;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+
+    section { padding: 72px 0 0; }
+    .split { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 40px; align-items: start; }
+
+    .feature-list { list-style: none; margin-top: 8px; border-top: 1px solid var(--border); }
+    .feature-list li {
+      display: grid; grid-template-columns: 28px 1fr; gap: 10px;
+      padding: 11px 0; border-bottom: 1px solid var(--border);
+      font-size: 15px; color: var(--text-2);
+    }
+    .feature-list i { font-style: normal; font-variant-numeric: tabular-nums; font-size: 12px; font-weight: 600; color: var(--primary); padding-top: 3px; }
 
     .flow {
-      margin: 22px 0 8px;
-      width: 100%;
-      overflow-x: auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 32px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
     }
-
-    .flow svg { width: 100%; height: auto; min-width: 640px; display: block; }
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 12px;
+    .step .n {
+      font-family: var(--serif);
+      font-size: 22px;
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: 10px;
     }
+    .step h3 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    .step p { font-size: 13px; color: var(--text-2); line-height: 1.5; }
 
-    .chip {
-      background: var(--surface-alt);
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-size: 13px;
-      padding: 6px 11px;
-      border-radius: 999px;
-    }
-
-    .note {
-      margin-top: 14px;
-      font-size: 13px;
-      color: var(--muted);
-      background: var(--bg-alt);
-      border-left: 3px solid var(--primary);
-      padding: 10px 14px;
-      border-radius: 0 8px 8px 0;
-    }
-
-    /* Chat mock */
-    .phone {
-      max-width: 440px;
-      margin: 16px 0 0;
-      background: var(--bg-alt);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
-    }
-
-    .phone-bar {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 16px;
+    .diagram {
+      margin-top: 20px;
       background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 20px 16px;
+    }
+    .diagram svg { width: 100%; height: auto; }
+    .diagram-wide { display: block; }
+    .diagram-tall { display: none; }
+    .diagram-note { font-size: 12px; color: var(--muted); padding: 12px 0 0; }
+
+    .stack {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border-top: 1px solid var(--border);
+    }
+    .stack span {
+      font-size: 14px; color: var(--text); font-weight: 500;
+      padding: 14px 16px 14px 0;
       border-bottom: 1px solid var(--border);
     }
 
-    .phone-bar .dot {
-      width: 28px;
-      height: 28px;
-      border-radius: 8px;
-      background: var(--primary-bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .phone-bar strong { font-size: 14px; color: var(--white); display: block; }
-    .phone-bar small { font-size: 11px; color: var(--muted); }
-
-    .thread { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
-
-    .bubble {
-      max-width: 86%;
-      padding: 12px 14px;
-      border-radius: 16px;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .bubble.agent {
-      align-self: flex-start;
+    .pull {
+      margin-top: 32px;
+      padding: 20px 22px;
+      border-left: 3px solid var(--primary);
       background: var(--surface);
-      border: 1px solid var(--border);
-      border-bottom-left-radius: 4px;
-      color: var(--text);
     }
-
-    .bubble.user {
-      align-self: flex-end;
-      background: var(--primary);
-      color: var(--white);
-      border-bottom-right-radius: 4px;
-    }
-
-    .bubble.tool {
-      align-self: flex-start;
-      background: transparent;
-      border: 1px dashed var(--border);
-      color: var(--muted);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 12px;
-      border-radius: 8px;
-    }
-
-    .meta {
-      font-size: 11px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 4px;
+    .pull p { font-family: var(--serif); font-size: 18px; line-height: 1.45; color: var(--text); }
+    .pull cite {
+      display: block; margin-top: 10px; font-style: normal; font-size: 12px;
+      color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase;
+      font-weight: 600; font-family: var(--sans);
     }
 
     footer {
-      margin-top: 12px;
-      padding-top: 28px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-      color: var(--muted);
-      font-size: 14px;
+      margin-top: 80px; padding-top: 20px; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+      font-size: 13px; color: var(--text-2);
     }
-
     footer strong { color: var(--text); font-weight: 600; }
 
-    @media (max-width: 600px) {
-      .hero { padding: 36px 0 28px; }
-      header { flex-direction: column; align-items: flex-start; }
+    @media (max-width: 980px) {
+      .hero, .split { grid-template-columns: 1fr; }
+      .stage { max-width: 680px; }
+      .device-chat { margin-top: 28px; }
+      h1 { max-width: none; }
+      .stack { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 720px) {
+      .stage { grid-template-columns: 1fr; justify-items: center; }
+      .device-chat { margin-top: 0; }
+      .device { width: min(330px, 100%); }
+      .flow { grid-template-columns: 1fr 1fr; gap: 20px 16px; }
+      .diagram-wide { display: none; }
+      .diagram-tall { display: block; }
+      .stack { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .page { padding: 0 18px 72px; }
+      .hero { padding-top: 32px; }
+      section { padding-top: 56px; }
+      .flow { grid-template-columns: 1fr; }
+      .byline .sep, .byline .hide-sm { display: none; }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="brand">
-        <svg class="mark" viewBox="0 0 40 40" aria-hidden="true">
-          <rect width="40" height="40" rx="10" fill="#7C3AED"/>
-          <path d="M20 8c-5.5 6.2-8 11-8 15.2C12 28.4 15.6 32 20 32s8-3.6 8-8.8C28 19 25.5 14.2 20 8z" fill="#F5F3FF"/>
-          <path d="M20 18.5c-1.7 2-2.4 3.5-2.4 4.8A2.4 2.4 0 0 0 20 25.7a2.4 2.4 0 0 0 2.4-2.4c0-1.3-.7-2.8-2.4-4.8z" fill="#7C3AED"/>
-        </svg>
-        <div>
-          <div class="brand-name">Market Lantern</div>
-          <div class="brand-sub">AI work sample</div>
-        </div>
+  <div class="page">
+    <header class="site-header">
+      <a class="lockup" href="#top">
+        <img src="assets/logo.png" alt="Market Lantern flame mark" />
+        <span>Market Lantern</span>
+      </a>
+      <div class="byline">
+        <span class="hide-sm">Enis Bozkurt</span>
+        <span class="sep" aria-hidden="true">·</span>
+        <a href="https://www.linkedin.com/in/enis-bozkurt" rel="noopener noreferrer">LinkedIn</a>
       </div>
-      <nav>
-        <a href="#problem">Problem</a>
-        <a href="#what">What it does</a>
-        <a href="#ai">How the AI works</a>
-        <a href="#stack">Stack</a>
-        <a href="#sample">Sample</a>
-      </nav>
     </header>
 
-    <div class="hero">
-      <div class="eyebrow">Personal project · Equity research + AI assistant</div>
-      <h1>Market Lantern</h1>
-      <p class="pitch">An AI-powered equity research mobile app with an in-app assistant that answers market questions by calling tools against live research data.</p>
+    <div class="hero" id="top">
+      <div>
+        <div class="kicker">Student project</div>
+        <h1>I built an equity research app, then gave it a way to answer questions.</h1>
+        <p class="lede">Market Lantern is a React Native client I have been building for quotes, charts, fundamentals, earnings, news, filings, and trade disclosures.</p>
+        <p class="lede">The piece I want to show here is the in-app assistant. It is a small FastAPI agent that can call tools against the same research data the app already stores.</p>
+        <p class="fine">Figures in the phone mockups are illustrative sample data, not live prices or results.</p>
+      </div>
+
+      <div class="stage">
+        <div class="device device-chat" aria-label="Market Lantern AI chat mockup">
+          <div class="device-screen">
+            <div class="island"></div>
+            <div class="status">
+              <span>9:41</span>
+              <span class="sig" aria-hidden="true">
+                <svg width="15" height="10" viewBox="0 0 15 10" fill="currentColor"><rect x="0" y="6" width="2.2" height="4" rx="0.4"/><rect x="3.4" y="4" width="2.2" height="6" rx="0.4"/><rect x="6.8" y="2" width="2.2" height="8" rx="0.4"/><rect x="10.2" y="0" width="2.2" height="10" rx="0.4"/></svg>
+                <svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M1 6.2a7 7 0 0 1 12 0"/><path d="M3.2 7.6a4.2 4.2 0 0 1 7.6 0"/><circle cx="7" cy="9.1" r="0.8" fill="currentColor" stroke="none"/></svg>
+                <svg width="22" height="10" viewBox="0 0 22 10"><rect x="0.5" y="0.5" width="18" height="9" rx="2" stroke="currentColor" fill="none"/><rect x="2" y="2" width="13" height="6" rx="0.8" fill="currentColor"/><rect x="19.2" y="3" width="2" height="4" rx="0.6" fill="currentColor"/></svg>
+              </span>
+            </div>
+            <div class="c-head">
+              <button class="icon-btn" tabindex="-1" aria-hidden="true">‹</button>
+              <div class="title-wrap">
+                <img src="assets/logo.png" alt="" />
+                <strong>Market Lantern AI</strong>
+              </div>
+              <span style="width:28px"></span>
+            </div>
+            <div class="thread">
+              <div class="bubble agent">
+                <div class="tag">Default greeting, from the app</div>
+                Hello! I am your AI assistant. How can I help you with your portfolio or market data today?
+              </div>
+              <div class="bubble user">Are there earnings today, and is the market open?</div>
+              <div class="bubble tool">example tool calls
+get_market_status()
+get_todays_earnings()</div>
+              <div class="bubble agent">
+                <div class="tag">Example output, illustrative</div>
+                I checked the app’s market status and today’s earnings calendar. I can tell you whether the U.S. market is open, and list the companies on the calendar from the database. If you have a symbol in mind, I can pull that company’s earnings history too.
+              </div>
+            </div>
+            <div class="composer">
+              <div class="field">Ask about stocks, market status...</div>
+              <div class="send" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                  <path d="M4 12h14M12 5l8 7-8 7" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="device device-quote" aria-label="Quote and chart screen mockup">
+          <div class="device-screen">
+            <div class="island"></div>
+            <div class="status">
+              <span>9:41</span>
+              <span class="sig" aria-hidden="true">
+                <svg width="15" height="10" viewBox="0 0 15 10" fill="currentColor"><rect x="0" y="6" width="2.2" height="4" rx="0.4"/><rect x="3.4" y="4" width="2.2" height="6" rx="0.4"/><rect x="6.8" y="2" width="2.2" height="8" rx="0.4"/><rect x="10.2" y="0" width="2.2" height="10" rx="0.4"/></svg>
+                <svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M1 6.2a7 7 0 0 1 12 0"/><path d="M3.2 7.6a4.2 4.2 0 0 1 7.6 0"/><circle cx="7" cy="9.1" r="0.8" fill="currentColor" stroke="none"/></svg>
+                <svg width="22" height="10" viewBox="0 0 22 10"><rect x="0.5" y="0.5" width="18" height="9" rx="2" stroke="currentColor" fill="none"/><rect x="2" y="2" width="13" height="6" rx="0.8" fill="currentColor"/><rect x="19.2" y="3" width="2" height="4" rx="0.6" fill="currentColor"/></svg>
+              </span>
+            </div>
+            <div class="q-head">
+              <button class="icon-btn" tabindex="-1" aria-hidden="true">‹</button>
+              <div class="spacer"></div>
+              <button class="icon-btn muted" tabindex="-1" aria-hidden="true">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v14"/></svg>
+              </button>
+              <button class="icon-btn muted" tabindex="-1" aria-hidden="true">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h12v16l-6-3-6 3V4z"/></svg>
+              </button>
+            </div>
+            <div class="identity">
+              <div class="letter">A</div>
+              <div class="sym">AAPL</div>
+              <div class="co">Apple Inc.</div>
+            </div>
+            <div class="px">
+              <div class="price">$192.40</div>
+              <div class="chg">+$1.24 (0.65%) <span>1 Day</span></div>
+            </div>
+            <div class="qstats">
+              <div class="qstat"><span>Open</span><b>$191.20</b></div>
+              <div class="qstat"><span>High</span><b>$193.10</b></div>
+              <div class="qstat"><span>Low</span><b>$190.85</b></div>
+            </div>
+            <div class="chart-wrap">
+              <svg viewBox="0 0 220 118" role="img" aria-label="Illustrative sample price chart">
+                <defs>
+                  <linearGradient id="area" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#10B981" stop-opacity="0.25"/>
+                    <stop offset="1" stop-color="#10B981" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <path d="M4 110 L4 68 L26 76 L48 60 L70 66 L92 44 L114 50 L136 32 L158 38 L180 24 L208 18 L208 110 Z" fill="url(#area)"/>
+                <path d="M4 68 L26 76 L48 60 L70 66 L92 44 L114 50 L136 32 L158 38 L180 24 L208 18" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="208" cy="18" r="3" fill="#10B981"/>
+              </svg>
+              <div class="yaxis"><span>193.1</span><span>192.0</span><span>190.9</span></div>
+              <div class="chart-caption">Illustrative sample data</div>
+            </div>
+            <div class="tfs" aria-label="Timeframes">
+              <span class="on">1D</span><span>1W</span><span>1M</span><span>3M</span><span>1Y</span><span>3Y</span><span>ALL</span>
+            </div>
+            <div class="tabs">
+              <span class="on">Overview</span>
+              <span>Fundamentals</span>
+              <span>Earnings</span>
+              <span>News</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <section id="problem">
-      <h2>The problem</h2>
-      <p>Equity research is spread across quotes, earnings calendars, news, filings, and trade disclosures. Looking that up usually means leaving a research view and searching in several places.</p>
-      <p>Market Lantern brings those sources into one mobile app. The AI assistant is there so a user can ask a question in plain language and get an answer grounded in the app’s own market data, or in a web search when the database does not have it.</p>
-    </section>
-
-    <section id="what">
-      <h2>What it does</h2>
-      <p>The mobile app is a professional equity research client. Alongside the assistant, it includes:</p>
-      <div class="grid">
-        <div class="card"><strong>Quotes and charts</strong><span>Live quotes, historical bars, company profiles, and custom interactive charts.</span></div>
-        <div class="card"><strong>Fundamentals</strong><span>Financials, ratios, analyst estimates, and related analysis views.</span></div>
-        <div class="card"><strong>News and filings</strong><span>News feeds, SEC filings, insider Form 4 activity, and congressional trade disclosures.</span></div>
-        <div class="card"><strong>Market context</strong><span>Market status, movers, sector performance, a Fear and Greed index, earnings and economic calendars, and options data.</span></div>
-        <div class="card"><strong>Portfolios and watchlists</strong><span>Saved lists and portfolio views, with market-aware background sync while markets are open.</span></div>
-        <div class="card"><strong>Community</strong><span>Profiles, friends, messaging, posts, and courses.</span></div>
+    <section id="app">
+      <div class="split">
+        <div>
+          <div class="section-kicker">The research app</div>
+          <h2>The work around a ticker, in one client.</h2>
+          <p class="lede">I got tired of jumping between a quote, an earnings calendar, a news feed, and a filing. The app keeps those views on one stock screen, with tabs that match how I actually read a name.</p>
+        </div>
+        <ul class="feature-list">
+          <li><i>01</i> Quotes, historical bars, and an interactive line chart with 1D through ALL ranges</li>
+          <li><i>02</i> Fundamentals, ratios, analyst estimates, and an analysis tab</li>
+          <li><i>03</i> News, SEC filings, and Form 4 insider activity</li>
+          <li><i>04</i> Congressional trade disclosures</li>
+          <li><i>05</i> Earnings and economic calendars, movers, and a Fear and Greed index</li>
+          <li><i>06</i> Watchlists, portfolios, and a small community layer</li>
+        </ul>
       </div>
-      <p class="note">This page describes the product and the AI assistant at a high level. It does not include source code, environment files, API keys, or internal service URLs.</p>
     </section>
 
-    <section id="ai">
-      <h2>How the AI works</h2>
-      <p>The in-app chat, labeled Market Lantern AI, talks to a Python FastAPI agent. The model can answer directly, or it can call tools when the question is about market data.</p>
+    <section id="assistant">
+      <div class="section-kicker">The assistant</div>
+      <h2>How a question moves through the agent.</h2>
+      <p class="lede">The chat screen is labeled Market Lantern AI. It talks to a Python service I run beside the app. The model only gets tools when the message looks like a data request.</p>
 
-      <div class="flow" aria-label="Architecture diagram of the Market Lantern AI pipeline">
-        <svg viewBox="0 0 900 220" role="img" xmlns="http://www.w3.org/2000/svg">
-          <title>Market Lantern AI pipeline: chat UI to FastAPI agent to language model and tools, then back to the user</title>
+      <div class="flow">
+        <div class="step">
+          <div class="n">01</div>
+          <h3>You ask in the app</h3>
+          <p>A question is typed in the chat, for example whether the market is open or who reports earnings today.</p>
+        </div>
+        <div class="step">
+          <div class="n">02</div>
+          <h3>The screen posts it</h3>
+          <p>The React Native client sends the message to the agent’s /agent/chat endpoint and waits for a text reply.</p>
+        </div>
+        <div class="step">
+          <div class="n">03</div>
+          <h3>Tools run if needed</h3>
+          <p>Greetings are answered directly. Data questions can call market status, stock search, earnings, news, or a web search.</p>
+        </div>
+        <div class="step">
+          <div class="n">04</div>
+          <h3>A reply comes back</h3>
+          <p>Tool output is trimmed, the model writes a short answer, and the chat screen renders it as Markdown.</p>
+        </div>
+      </div>
+
+      <blockquote class="pull">
+        <p>You are “Market Lantern AI”, a professional financial assistant for Market Lantern customers. Speak directly to the user. Be helpful, polite, and professional. Do not output internal monologue. Use tools only when needed for data.</p>
+        <cite>System prompt, from the project</cite>
+      </blockquote>
+    </section>
+
+    <section id="architecture">
+      <div class="section-kicker">Architecture</div>
+      <h2>The path from a chat bubble to a fact.</h2>
+      <p class="lede">I kept the agent outside the mobile app so the tool loop could stay in Python. The tools read from the same Convex backend that already serves the screens, rather than inventing a second data path.</p>
+
+      <div class="diagram">
+        <svg class="diagram-wide" viewBox="0 0 960 220" role="img" aria-label="Architecture of the Market Lantern AI agent">
           <defs>
-            <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-              <path d="M 0 0 L 10 5 L 0 10 z" fill="#A78BFA"/>
+            <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+              <path d="M0 0 L10 5 L0 10 z" fill="#6B21A8"/>
             </marker>
           </defs>
-          <rect x="10" y="70" width="150" height="70" rx="12" fill="#1B2434" stroke="#2E3A52"/>
-          <text x="85" y="100" text-anchor="middle" fill="#E5E7EB" font-size="13" font-family="system-ui, sans-serif" font-weight="600">Chat UI</text>
-          <text x="85" y="118" text-anchor="middle" fill="#94A3B8" font-size="11" font-family="system-ui, sans-serif">React Native</text>
+          <rect x="8" y="70" width="150" height="68" rx="8" fill="#fff" stroke="#E5E7EB"/>
+          <text x="83" y="99" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#111827">Chat screen</text>
+          <text x="83" y="117" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563">React Native</text>
 
-          <line x1="160" y1="105" x2="214" y2="105" stroke="#A78BFA" stroke-width="2" marker-end="url(#arrow)"/>
+          <line x1="158" y1="104" x2="196" y2="104" stroke="#6B21A8" stroke-width="1.5" marker-end="url(#arr)"/>
 
-          <rect x="216" y="70" width="170" height="70" rx="12" fill="#1B2434" stroke="#7C3AED"/>
-          <text x="301" y="100" text-anchor="middle" fill="#E5E7EB" font-size="13" font-family="system-ui, sans-serif" font-weight="600">FastAPI agent</text>
-          <text x="301" y="118" text-anchor="middle" fill="#94A3B8" font-size="11" font-family="system-ui, sans-serif">/agent/chat</text>
+          <rect x="198" y="70" width="160" height="68" rx="8" fill="#F3F0FF" stroke="#6B21A8"/>
+          <text x="278" y="99" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#111827">FastAPI agent</text>
+          <text x="278" y="117" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563">POST /agent/chat</text>
 
-          <line x1="386" y1="105" x2="440" y2="105" stroke="#A78BFA" stroke-width="2" marker-end="url(#arrow)"/>
+          <line x1="358" y1="104" x2="396" y2="104" stroke="#6B21A8" stroke-width="1.5" marker-end="url(#arr)"/>
 
-          <rect x="442" y="70" width="170" height="70" rx="12" fill="#1B2434" stroke="#2E3A52"/>
-          <text x="527" y="100" text-anchor="middle" fill="#E5E7EB" font-size="13" font-family="system-ui, sans-serif" font-weight="600">Language model</text>
-          <text x="527" y="118" text-anchor="middle" fill="#94A3B8" font-size="11" font-family="system-ui, sans-serif">OpenRouter or Groq</text>
+          <rect x="398" y="70" width="160" height="68" rx="8" fill="#fff" stroke="#E5E7EB"/>
+          <text x="478" y="99" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#111827">Language model</text>
+          <text x="478" y="117" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563">OpenRouter or Groq</text>
 
-          <line x1="527" y1="140" x2="527" y2="162" stroke="#A78BFA" stroke-width="2" marker-end="url(#arrow)"/>
+          <line x1="478" y1="138" x2="478" y2="164" stroke="#6B21A8" stroke-width="1.5" marker-end="url(#arr)"/>
 
-          <rect x="390" y="166" width="274" height="44" rx="12" fill="#141C2E" stroke="#2E3A52"/>
-          <text x="527" y="193" text-anchor="middle" fill="#CBD5E1" font-size="12" font-family="system-ui, sans-serif">Tool loop, if needed</text>
+          <rect x="198" y="166" width="360" height="46" rx="8" fill="#fff" stroke="#E5E7EB"/>
+          <text x="378" y="184" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#111827">Tools, if the question needs data</text>
+          <text x="378" y="200" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563">status  ·  stocks  ·  earnings  ·  news  ·  web search</text>
 
-          <line x1="390" y1="188" x2="300" y2="188" stroke="#A78BFA" stroke-width="2"/>
-          <line x1="300" y1="188" x2="300" y2="140" stroke="#A78BFA" stroke-width="2" marker-end="url(#arrow)"/>
+          <line x1="278" y1="166" x2="278" y2="138" stroke="#6B21A8" stroke-width="1.25" marker-end="url(#arr)"/>
 
-          <rect x="680" y="28" width="210" height="70" rx="12" fill="#1B2434" stroke="#2E3A52"/>
-          <text x="785" y="58" text-anchor="middle" fill="#E5E7EB" font-size="13" font-family="system-ui, sans-serif" font-weight="600">Convex database</text>
-          <text x="785" y="76" text-anchor="middle" fill="#94A3B8" font-size="11" font-family="system-ui, sans-serif">Status, stocks, earnings, news</text>
+          <line x1="558" y1="189" x2="598" y2="189" stroke="#6B21A8" stroke-width="1.5" marker-end="url(#arr)"/>
 
-          <rect x="680" y="122" width="210" height="70" rx="12" fill="#1B2434" stroke="#2E3A52"/>
-          <text x="785" y="152" text-anchor="middle" fill="#E5E7EB" font-size="13" font-family="system-ui, sans-serif" font-weight="600">Web search tool</text>
-          <text x="785" y="170" text-anchor="middle" fill="#94A3B8" font-size="11" font-family="system-ui, sans-serif">Used when data is not in-app</text>
+          <rect x="600" y="16" width="350" height="68" rx="8" fill="#fff" stroke="#E5E7EB"/>
+          <text x="775" y="45" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#111827">Convex database</text>
+          <text x="775" y="63" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563">Market status, stocks, earnings, news</text>
 
-          <line x1="664" y1="188" x2="680" y2="157" stroke="#A78BFA" stroke-width="2" marker-end="url(#arrow)"/>
-          <line x1="664" y1="188" x2="680" y2="63" stroke="#A78BFA" stroke-width="2" marker-end="url(#arrow)"/>
+          <rect x="600" y="144" width="350" height="68" rx="8" fill="#fff" stroke="#E5E7EB"/>
+          <text x="775" y="173" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#111827">Web search tool</text>
+          <text x="775" y="191" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563">Used when the answer is not in the app</text>
+
+          <line x1="600" y1="50" x2="560" y2="50" stroke="#6B21A8" stroke-width="1.25"/>
+          <line x1="560" y1="50" x2="560" y2="166" stroke="#6B21A8" stroke-width="1.25"/>
         </svg>
-      </div>
 
-      <div class="pipeline">
-        <div class="step">
-          <div class="step-num">1</div>
-          <div>
-            <h3>The user asks a question in the app</h3>
-            <p>The chat screen sends the message to the agent’s chat endpoint. Replies come back as text and are rendered as Markdown.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <div>
-            <h3>The agent decides whether tools are needed</h3>
-            <p>Short greetings are answered directly. If the message looks like a data request (price, earnings, news, market status, fundamentals, and similar terms), the model is allowed to call tools. Otherwise it answers without them.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <div>
-            <h3>Tools fetch facts, then the model writes the reply</h3>
-            <p>Supported tools look up market status, search stocks, get earnings for a symbol or for today, and fetch stored market news. A web search tool is used when the answer is not in the database. Tool results are truncated before they go back to the model, and a second pass turns them into a customer-facing answer. The assistant is instructed to speak directly to the user and not to show internal reasoning.</p>
-          </div>
-        </div>
-      </div>
+        <svg class="diagram-tall" viewBox="0 0 360 520" role="img" aria-label="Architecture of the Market Lantern AI agent">
+          <defs>
+            <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+              <path d="M0 0 L10 5 L0 10 z" fill="#6B21A8"/>
+            </marker>
+          </defs>
+          <rect x="40" y="8" width="280" height="62" rx="8" fill="#fff" stroke="#E5E7EB"/>
+          <text x="180" y="34" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="#111827">Chat screen</text>
+          <text x="180" y="52" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#4B5563">React Native</text>
+          <line x1="180" y1="70" x2="180" y2="94" stroke="#6B21A8" stroke-width="1.5" marker-end="url(#arr2)"/>
 
-      <h3>System prompt (from the project)</h3>
-      <div class="card">
-        <span style="color:#CBD5E1; font-size:14px; display:block;">
-          You are “Market Lantern AI”, a professional financial assistant for Market Lantern customers.
-          Speak directly to the user. Be helpful, polite, and professional.
-          Do not output internal monologue or thoughts. Just output the response.
-          Use tools only when needed for data (price, news, earnings). If no tool is needed, respond normally.
-        </span>
+          <rect x="40" y="96" width="280" height="62" rx="8" fill="#F3F0FF" stroke="#6B21A8"/>
+          <text x="180" y="122" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="#111827">FastAPI agent</text>
+          <text x="180" y="140" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#4B5563">POST /agent/chat</text>
+          <line x1="180" y1="158" x2="180" y2="182" stroke="#6B21A8" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+          <rect x="40" y="184" width="280" height="62" rx="8" fill="#fff" stroke="#E5E7EB"/>
+          <text x="180" y="210" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="#111827">Language model</text>
+          <text x="180" y="228" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#4B5563">OpenRouter or Groq</text>
+          <line x1="180" y1="246" x2="180" y2="270" stroke="#6B21A8" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+          <rect x="40" y="272" width="280" height="62" rx="8" fill="#fff" stroke="#E5E7EB"/>
+          <text x="180" y="296" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#111827">Tools, if needed</text>
+          <text x="180" y="314" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563">status · stocks · earnings · news · web</text>
+          <line x1="110" y1="334" x2="110" y2="358" stroke="#6B21A8" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <line x1="250" y1="334" x2="250" y2="358" stroke="#6B21A8" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+          <rect x="16" y="360" width="168" height="70" rx="8" fill="#fff" stroke="#E5E7EB"/>
+          <text x="100" y="390" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#111827">Convex database</text>
+          <text x="100" y="408" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563">App research data</text>
+
+          <rect x="196" y="360" width="148" height="70" rx="8" fill="#fff" stroke="#E5E7EB"/>
+          <text x="270" y="390" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#111827">Web search</text>
+          <text x="270" y="408" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563">If not in the app</text>
+
+          <line x1="180" y1="430" x2="180" y2="454" stroke="#6B21A8" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <rect x="40" y="456" width="280" height="54" rx="8" fill="#F3F0FF" stroke="#6B21A8"/>
+          <text x="180" y="488" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="#111827">Reply in the chat</text>
+        </svg>
+        <p class="diagram-note">Internal service URLs and keys are omitted from this page.</p>
       </div>
     </section>
 
     <section id="stack">
-      <h2>Tech stack</h2>
-      <div class="chips">
-        <span class="chip">Expo SDK 54</span>
-        <span class="chip">React Native</span>
-        <span class="chip">TypeScript</span>
-        <span class="chip">Python</span>
-        <span class="chip">FastAPI</span>
-        <span class="chip">OpenRouter</span>
-        <span class="chip">Function calling / tools</span>
-        <span class="chip">Convex</span>
-        <span class="chip">Clerk</span>
-        <span class="chip">Financial Modeling Prep</span>
-        <span class="chip">Alpaca Markets</span>
-        <span class="chip">SVG charts</span>
-      </div>
-      <p class="note">The default hosted model in the agent is configurable in code. The project’s current default is Xiaomi Mimo V2 Flash via OpenRouter, with optional Groq or local Ollama paths.</p>
-    </section>
-
-    <section id="sample">
-      <h2>Sample output</h2>
-      <p>The first message below is the real default greeting from the chat screen in the project. The rest of the thread is an illustrative example of the tool-use path. It is not a live model transcript, and it does not use real prices or earnings figures.</p>
-
-      <div class="phone" aria-label="Chat example">
-        <div class="phone-bar">
-          <div class="dot">
-            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
-              <path d="M8 2c-2.6 3-3.8 5.2-3.8 7.1C4.2 11.7 5.9 13.4 8 13.4s3.8-1.7 3.8-4.3C11.8 7.2 10.6 5 8 2z" fill="#A78BFA"/>
-            </svg>
-          </div>
-          <div>
-            <strong>Market Lantern AI</strong>
-            <small>In-app assistant</small>
-          </div>
-        </div>
-        <div class="thread">
-          <div class="bubble agent">
-            <div class="meta">Default greeting (from the app)</div>
-            Hello! I am your AI assistant. How can I help you with your portfolio or market data today?
-          </div>
-          <div class="bubble user">Are there earnings today, and is the market open?</div>
-          <div class="bubble tool">
-            example tool calls<br />
-            get_market_status()<br />
-            get_todays_earnings()
-          </div>
-          <div class="bubble agent">
-            <div class="meta">Example output (illustrative)</div>
-            I checked Market Lantern’s market status and today’s earnings calendar. I can tell you whether the U.S. market is open or closed right now, and list the companies on today’s earnings calendar from the app’s database. If you have a symbol in mind, I can also pull that company’s earnings history.
-          </div>
-        </div>
+      <div class="section-kicker">Stack</div>
+      <h2>What it is built with.</h2>
+      <div class="stack">
+        <span>Expo SDK 54</span>
+        <span>React Native</span>
+        <span>TypeScript</span>
+        <span>Python</span>
+        <span>FastAPI</span>
+        <span>Convex</span>
+        <span>Clerk</span>
+        <span>OpenRouter</span>
+        <span>Financial Modeling Prep</span>
+        <span>Alpaca Markets</span>
       </div>
     </section>
 
@@ -531,7 +631,7 @@
         <strong>Enis Bozkurt</strong><br />
         <a href="https://www.linkedin.com/in/enis-bozkurt" rel="noopener noreferrer">linkedin.com/in/enis-bozkurt</a>
       </div>
-      <div>AI work sample · Market Lantern<br />No source code, keys, or private data on this page.</div>
+      <div>Market Lantern, a student project.<br />This page has no source code, keys, or private data.</div>
     </footer>
   </div>
 </body>
